@@ -1,0 +1,26 @@
+{
+  "name": "les-petits-plats",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch",
+    "dev": "webpack serve",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.7",
+    "css-loader": "^7.1.2",
+    "postcss": "^8.5.3",
+    "postcss-loader": "^8.1.1",
+    "postcss-preset-env": "^10.1.6",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.99.8",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1"
+  },
+  "description": ""
+}
