@@ -2,6 +2,7 @@ import "../css/style.css";
 
 // Selectors
 const cardContainer = document.querySelector(".card-container");
+const numberRecipes = document.querySelector(".number-recipes");
 
 /**
  * API call to fetch
@@ -17,6 +18,8 @@ async function getRecipes() {
 }
 
 // Filters
+const totalRecipes = recipesData.recipes.length;
+numberRecipes.textContent = `${totalRecipes} recettes`;
 
 // Cards
 async function displayRecipes() {
