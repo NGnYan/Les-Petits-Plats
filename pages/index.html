@@ -3,9 +3,96 @@
   <head>
     <meta charset="UTF-8" />
     <title>Les Petits Plats</title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
-  <body>
-    <h1 class="text-4xl text-blue-700">My Webpack + Tailwind App</h1>
+  <body class="bg-[#f4f4f4]">
+    <!-- Header -->
+    <header
+      class="relative bg-[#ababab] p-4 w-full h-[500px] flex items-center justify-center"
+    >
+      <img
+        src="/assets/icons/logo.svg"
+        alt="Logo"
+        class="absolute top-0 left-0 m-4"
+      />
+
+      <!-- Titre and search bar-->
+      <div class="w-[70%] mx-auto">
+        <h1
+          class="text-[#FFD15B] font-anton text-5xl text-center leading-tight"
+        >
+          CHERCHEZ PARMI PLUS DE 1500 RECETTES <br />
+          DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES
+        </h1>
+
+        <div class="relative w-[90%] mx-auto mt-[20px]">
+          <input
+            type="text"
+            placeholder="Rechercher une recette, un ingrédient..."
+            class="bg-white rounded-xl w-full h-[70px] pl-8"
+          />
+          <button
+            class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+            aria-label="Rechercher"
+          >
+            <img
+              src="/assets/icons/search-logo.svg"
+              alt="Search"
+              class="w-6 h-6"
+            />
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="min-h-[calc(100vh_-_500px)] w-full">
+      <!-- Filters -->
+      <div
+        class="flex pt-[20px] pl-[80px] pr-[80px] pb-[50px] justify-between items-center"
+      >
+        <div class="flex gap-6">
+          <button
+            class="dropdown-btn bg-white h-[50px] text-black px-[20px] py-[10px] rounded-lg shadow cursor-pointer"
+          >
+            Ingrédients
+            <i class="fa-solid fa-chevron-down"></i>
+            <i class="fa-solid fa-chevron-up hidden"></i>
+          </button>
+
+          <button
+            class="dropdown-btn bg-white h-[50px] text-black px-[20px] py-[10px] rounded-lg shadow cursor-pointer"
+          >
+            Appareils
+            <i class="fa-solid fa-chevron-down"></i>
+            <i class="fa-solid fa-chevron-up hidden"></i>
+          </button>
+
+          <button
+            class="dropdown-btn bg-white h-[50px] text-black px-[20px] py-[10px] rounded-lg shadow cursor-pointer"
+          >
+            Ustensiles
+            <i class="fa-solid fa-chevron-down"></i>
+            <i class="fa-solid fa-chevron-up hidden"></i>
+          </button>
+        </div>
+
+        <div class="number-recipes text-black font-bold text-xl font-anton">
+          <h1>1500 recettes</h1>
+        </div>
+      </div>
+
+      <!-- Recipes cards -->
+      <div class="flex justify-center">
+        <div
+          class="card-container bg-white h-[450px] w-[300px] rounded-lg mb-[50px]"
+        ></div>
+      </div>
+    </main>
     <script src="bundle.js"></script>
   </body>
 </html>
