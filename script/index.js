@@ -4,6 +4,8 @@ import "../css/style.css";
 const cardContainer = document.querySelector(".card-container");
 const numberRecipes = document.querySelector(".number-recipes");
 
+let recipesData = [];
+
 /**
  * API call to fetch
  * @returns {Promise<Object>} JSON data of the recipes.
@@ -14,12 +16,13 @@ async function getRecipes() {
     throw new Error(`Erreur ${response.status}`);
   }
   const data = await response.json();
-  return data;
+  return data.recipes;
 }
 
 // Filters
-const totalRecipes = recipesData.recipes.length;
-numberRecipes.textContent = `${totalRecipes} recettes`;
+function updateNumberRecipes(recipes) {
+  numberRecipes.textContent = `${recipes.length} recettes`;
+}
 
 // Cards
 async function displayRecipes() {
@@ -59,4 +62,14 @@ async function displayRecipes() {
   });
 }
 
-displayRecipes();
+async function init() {
+  try {
+    recipesData = await getRecipes();
+    updateNumberRecipes(recipesData);
+    displayRecipes(recipesData);
+  } catch (error) {
+    console.error("Erreur lors de l'initialisation :", error);
+  }
+}
+
+init();
