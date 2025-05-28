@@ -20,24 +20,49 @@ async function getRecipes() {
 }
 
 // Filters
+
+/**
+ * Updates the text content
+ * @param {Array} recipes - An array of recipes objects.
+ */
 function updateNumberRecipes(recipes) {
   numberRecipes.textContent = `${recipes.length} recettes`;
 }
 
 // Cards
+
+/**
+ * Display the recipe cards
+ */
 async function displayRecipes() {
   const recipes = await getRecipes();
 
   recipes.forEach((recipe) => {
     const card = document.createElement("div");
-    card.className = "card bg-white h-[450px] w-[300px] rounded-lg mb-[50px]";
+    card.className =
+      "card bg-white h-[700px] w-full rounded-xl mb-[50px] mx-auto overflow-hidden";
 
-    const img = document.createElement("img");
-    img.src = recipe.image;
-    img.alt = recipe.name;
+    const imgRecipe = document.createElement("img");
+    imgRecipe.src = `./assets/recipes/${recipe.image}`;
+    imgRecipe.alt = recipe.name;
+    imgRecipe.classList.add(
+      "img-card-recipe",
+      "w-full",
+      "h-48",
+      "object-cover",
+      "rounded-t-lg"
+    );
 
-    const title = document.createElement("h2");
-    title.textContent = recipe.name;
+    const titleRecipe = document.createElement("h2");
+    titleRecipe.textContent = recipe.name;
+    titleRecipe.classList.add(
+      "font-anton",
+      "font-bold",
+      "text-[1.2em]",
+      "pl-[30px]",
+      "pt-[40px]",
+      "pb-[40px]"
+    );
 
     const subtitleRecipe = document.createElement("h3");
     subtitleRecipe.textContent = "RECETTE";
@@ -49,10 +74,10 @@ async function displayRecipes() {
     subtitleIngredient.textContent = "INGRÉDIENTS";
 
     const ingredient = document.createElement("p");
-    ingredient.textContent = recipe.ingredients;
+    ingredient.textContent = recipe.ingredients.join(", ");
 
-    card.appendChild(img);
-    card.appendChild(title);
+    card.appendChild(imgRecipe);
+    card.appendChild(titleRecipe);
     card.appendChild(subtitleRecipe);
     card.appendChild(description);
     card.appendChild(subtitleIngredient);
@@ -62,6 +87,9 @@ async function displayRecipes() {
   });
 }
 
+/**
+ * Initializes the index page
+ */
 async function init() {
   try {
     recipesData = await getRecipes();
