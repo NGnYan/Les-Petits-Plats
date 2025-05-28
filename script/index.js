@@ -2,7 +2,7 @@ import "../css/style.css";
 
 // Class
 
-const subtitleClassCard = ["text-[#ababab]", "pl-[30px]", "pt-[30px]"];
+const subtitleClassCard = ["text-[#959595]", "pl-[30px]", "pt-[30px]"];
 
 // Selectors
 const cardContainer = document.querySelector(".card-container");
@@ -64,6 +64,7 @@ async function displayRecipes() {
       "font-bold",
       "text-[1.2em]",
       "pl-[30px]",
+      "pr-[30px]",
       "pt-[40px]"
     );
 
@@ -109,7 +110,7 @@ async function displayRecipes() {
         if (ingredient.unit) {
           ingredientQuantity.textContent += ` ${ingredient.unit}`;
         }
-        ingredientQuantity.classList.add("text-[#ababab]");
+        ingredientQuantity.classList.add("text-[#959595]");
       }
 
       li.appendChild(ingredientName);
