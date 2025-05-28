@@ -2,7 +2,7 @@ import "../css/style.css";
 
 // Class
 
-const subtitleClassCard = ["text-[#ababab]", "pl-[30px]", "pt-[40px]"];
+const subtitleClassCard = ["text-[#ababab]", "pl-[30px]", "pt-[30px]"];
 
 // Selectors
 const cardContainer = document.querySelector(".card-container");
@@ -62,7 +62,7 @@ async function displayRecipes() {
     titleRecipe.classList.add(
       "font-anton",
       "font-bold",
-      "text-[0.9em]",
+      "text-[1.2em]",
       "pl-[30px]",
       "pt-[40px]"
     );
