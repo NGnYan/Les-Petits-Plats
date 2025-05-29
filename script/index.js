@@ -1,5 +1,6 @@
 import "../css/style.css";
 import { createCard } from "../script/components/createCards";
+import { displaySearchCards } from "./components/recipeSearch";
 
 // Class
 
@@ -9,6 +10,8 @@ const subtitleClassCard = ["text-[#959595]", "pl-[30px]", "pt-[30px]"];
 const cardContainer = document.querySelector(".card-container");
 const numberRecipes = document.querySelector(".number-recipes");
 const dropdownButtons = document.querySelectorAll(".dropdown-btn");
+const inputSearchBar = document.querySelector(".search-bar");
+const searchBtn = document.querySelector(".search-btn");
 
 let recipesData = [];
 
@@ -24,6 +27,18 @@ async function getRecipes() {
   const data = await response.json();
   return data.recipes;
 }
+
+// Search Bar
+
+inputSearchBar.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    displaySearchCards(inputSearchBar, cardContainer);
+  }
+});
+
+searchBtn.addEventListener("click", () => {
+  displaySearchCards(inputSearchBar, cardContainer);
+});
 
 // Filters
 
