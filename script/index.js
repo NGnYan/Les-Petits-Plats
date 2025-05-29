@@ -7,6 +7,7 @@ const subtitleClassCard = ["text-[#959595]", "pl-[30px]", "pt-[30px]"];
 // Selectors
 const cardContainer = document.querySelector(".card-container");
 const numberRecipes = document.querySelector(".number-recipes");
+const dropdownButtons = document.querySelectorAll(".dropdown-btn");
 
 let recipesData = [];
 
@@ -24,6 +25,16 @@ async function getRecipes() {
 }
 
 // Filters
+
+dropdownButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const chevronDown = btn.querySelector(".fa-chevron-down");
+    const chevronUp = btn.querySelector(".fa-chevron-up");
+
+    chevronDown.classList.toggle("invisible");
+    chevronUp.classList.toggle("visible");
+  });
+});
 
 /**
  * Updates the text content
@@ -105,12 +116,16 @@ async function displayRecipes() {
       ingredientName.textContent = ingredient.ingredient;
 
       const ingredientQuantity = document.createElement("span");
+      ingredientQuantity.classList.add("text-[#959595]");
+
       if (ingredient.quantity) {
         ingredientQuantity.textContent = ` ${ingredient.quantity}`;
+
         if (ingredient.unit) {
           ingredientQuantity.textContent += ` ${ingredient.unit}`;
         }
-        ingredientQuantity.classList.add("text-[#959595]");
+      } else {
+        ingredientQuantity.textContent = "-";
       }
 
       li.appendChild(ingredientName);
