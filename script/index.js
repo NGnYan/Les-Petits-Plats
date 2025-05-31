@@ -32,12 +32,22 @@ async function getRecipes() {
 
 inputSearchBar.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
-    displaySearchCards(inputSearchBar, cardContainer);
+    displaySearchCards(
+      inputSearchBar,
+      recipesData,
+      cardContainer,
+      subtitleClassCard
+    );
   }
 });
 
 searchBtn.addEventListener("click", () => {
-  displaySearchCards(inputSearchBar, cardContainer);
+  displaySearchCards(
+    inputSearchBar,
+    recipesData,
+    cardContainer,
+    subtitleClassCard
+  );
 });
 
 // Filters
