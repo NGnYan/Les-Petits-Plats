@@ -21,7 +21,12 @@ export function displaySearchCards(
   );
 
   if (filteredRecipes.length === 0) {
-    cardContainer.innerHTML = `<p class="text-center text-xl mt-8">Aucune recette trouvée !</p>`;
+    cardContainer.innerHTML = `
+    <p class="absolute flex items-center justify-center w-full text-center text-lg whitespace-nowrap">
+      Aucune recette trouvée !
+    </p>
+  `;
+
     return;
   }
 
