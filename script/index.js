@@ -1,6 +1,7 @@
 import "../css/style.css";
 import { createCard } from "../script/components/createCards";
 import { displaySearchCards } from "./components/recipeSearch";
+import { updateNumberRecipes } from "./components/utils";
 
 // Class
 
@@ -8,7 +9,6 @@ const subtitleClassCard = ["text-[#959595]", "pl-[30px]", "pt-[30px]"];
 
 // Selectors
 const cardContainer = document.querySelector(".card-container");
-const numberRecipes = document.querySelector(".number-recipes");
 const dropdownButtons = document.querySelectorAll(".dropdown-btn");
 const inputSearchBar = document.querySelector(".search-bar");
 const searchBtn = document.querySelector(".search-btn");
@@ -61,14 +61,6 @@ dropdownButtons.forEach((btn) => {
     chevronUp.classList.toggle("visible");
   });
 });
-
-/**
- * Updates the text content
- * @param {Array} recipes - An array of recipes objects.
- */
-function updateNumberRecipes(recipes) {
-  numberRecipes.textContent = `${recipes.length} recettes`;
-}
 
 // Cards
 

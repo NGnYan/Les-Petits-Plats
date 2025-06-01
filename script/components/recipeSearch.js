@@ -1,24 +1,24 @@
 import { createCard } from "./createCards";
+import { updateNumberRecipes } from "./utils";
+import { filterRecipes } from "./utils";
 
+/**
+ * Displays recipe cards based on the search input.
+ * Filters the recipes using the search text, then dynamically generates and displays matching cards.
+ *
+ * @param {HTMLInputElement} inputSearchBar - The input field where the user types the search text.
+ * @param {Array} allRecipes - The array of all available recipe objects.
+ * @param {HTMLElement} cardContainer - The DOM element where recipe cards will be rendered.
+ * @param {Array} subtitleClassCard - Array of CSS classes to style the card subtitles.
+ */
 export function displaySearchCards(
   inputSearchBar,
   allRecipes,
   cardContainer,
   subtitleClassCard
 ) {
-  const searchText = inputSearchBar.value.trim().toLowerCase();
-
-  const filteredRecipes = allRecipes.filter(
-    (recipe) =>
-      recipe.name.toLowerCase().includes(searchText) ||
-      recipe.description.toLowerCase().includes(searchText) ||
-      recipe.ingredients.some(
-        (ingredient) =>
-          ingredient.ingredient.toLowerCase().includes(searchText) &&
-          ingredient.quantity != null &&
-          ingredient.quantity != undefined
-      )
-  );
+  const filteredRecipes = filterRecipes(inputSearchBar, allRecipes);
+  updateNumberRecipes(filteredRecipes);
 
   if (filteredRecipes.length === 0) {
     cardContainer.innerHTML = `
@@ -26,7 +26,6 @@ export function displaySearchCards(
       Aucune recette trouvée !
     </p>
   `;
-
     return;
   }
 
