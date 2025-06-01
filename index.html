@@ -56,47 +56,68 @@
         class="flex pt-[20px] pl-[80px] pr-[80px] pb-[50px] justify-between items-center"
       >
         <div class="flex gap-6">
-          <button
-            class="dropdown-btn bg-white h-[50px] text-black px-[20px] py-[10px] rounded-lg cursor-pointer flex items-center justify-between w-[180px]"
-          >
-            Ingrédients
-            <div class="relative w-[20px]">
-              <i
-                class="fa-solid fa-chevron-down absolute right-0 -translate-y-2"
-              ></i>
-              <i
-                class="fa-solid fa-chevron-up absolute right-0 -translate-y-2 invisible"
-              ></i>
-            </div>
-          </button>
+          <div class="dropdown-container flex flex-col">
+            <button
+              class="dropdown-btn bg-white h-[50px] text-black px-[20px] py-[10px] rounded-lg cursor-pointer flex items-center justify-between w-[180px]"
+              aria-expanded="false"
+            >
+              Ingrédients
+              <div class="relative w-[20px]">
+                <i
+                  class="fa-solid fa-chevron-down absolute right-0 -translate-y-2"
+                ></i>
+                <i
+                  class="fa-solid fa-chevron-up absolute right-0 -translate-y-2 invisible"
+                ></i>
+              </div>
+            </button>
+            <ul
+              id="ingredients-dropdown"
+              class="dropdown-list bg-white text-black px-[20px] py-[10px] rounded-b-lg cursor-pointer w-[180px] translate-y-[-10px] hidden"
+            ></ul>
+          </div>
 
-          <button
-            class="dropdown-btn bg-white h-[50px] text-black px-[20px] py-[10px] rounded-lg cursor-pointer flex items-center justify-between w-[180px]"
-          >
-            Appareils
-            <div class="relative w-[20px]">
-              <i
-                class="fa-solid fa-chevron-down absolute right-0 -translate-y-2"
-              ></i>
-              <i
-                class="fa-solid fa-chevron-up absolute right-0 -translate-y-2 invisible"
-              ></i>
-            </div>
-          </button>
+          <div class="dropdown-container flex flex-col">
+            <button
+              class="dropdown-btn bg-white h-[50px] text-black px-[20px] py-[10px] rounded-lg cursor-pointer flex items-center justify-between w-[180px]"
+              aria-expanded="false"
+            >
+              Appareils
+              <div class="relative w-[20px]">
+                <i
+                  class="fa-solid fa-chevron-down absolute right-0 -translate-y-2"
+                ></i>
+                <i
+                  class="fa-solid fa-chevron-up absolute right-0 -translate-y-2 invisible"
+                ></i>
+              </div>
+            </button>
+            <ul
+              id="appliances-dropdown"
+              class="dropdown-list bg-white text-black px-[20px] py-[10px] rounded-b-lg cursor-pointer w-[180px] translate-y-[-10px] hidden"
+            ></ul>
+          </div>
 
-          <button
-            class="dropdown-btn bg-white h-[50px] text-black px-[20px] py-[10px] rounded-lg cursor-pointer flex items-center justify-between w-[180px]"
-          >
-            Ustensiles
-            <div class="relative w-[20px]">
-              <i
-                class="fa-solid fa-chevron-down absolute right-0 -translate-y-2"
-              ></i>
-              <i
-                class="fa-solid fa-chevron-up absolute right-0 -translate-y-2 invisible"
-              ></i>
-            </div>
-          </button>
+          <div class="dropdown-container flex flex-col">
+            <button
+              class="dropdown-btn bg-white h-[50px] text-black px-[20px] py-[10px] rounded-lg cursor-pointer flex items-center justify-between w-[180px]"
+              aria-expanded="false"
+            >
+              Ustensiles
+              <div class="relative w-[20px]">
+                <i
+                  class="fa-solid fa-chevron-down absolute right-0 -translate-y-2"
+                ></i>
+                <i
+                  class="fa-solid fa-chevron-up absolute right-0 -translate-y-2 invisible"
+                ></i>
+              </div>
+            </button>
+            <ul
+              id="ustensils-dropdown"
+              class="dropdown-list bg-white text-black px-[20px] py-[10px] rounded-b-lg cursor-pointer w-[180px] translate-y-[-10px] hidden"
+            ></ul>
+          </div>
         </div>
 
         <div

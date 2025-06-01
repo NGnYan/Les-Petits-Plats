@@ -2,6 +2,7 @@ import "../css/style.css";
 import { createCard } from "../script/components/createCards";
 import { displaySearchCards } from "./components/recipeSearch";
 import { updateNumberRecipes } from "./components/utils";
+import { setupDropdownMenus } from "./components/dropdownList";
 
 // Class
 
@@ -12,6 +13,9 @@ const cardContainer = document.querySelector(".card-container");
 const dropdownButtons = document.querySelectorAll(".dropdown-btn");
 const inputSearchBar = document.querySelector(".search-bar");
 const searchBtn = document.querySelector(".search-btn");
+const dropdownIngredients = document.getElementById("ingredients-dropdown");
+const dropdownAppliances = document.getElementById("appliances-dropdown");
+const dropdownUstensils = document.getElementById("ustensils-dropdown");
 
 let recipesData = [];
 
@@ -54,11 +58,31 @@ searchBtn.addEventListener("click", () => {
 
 dropdownButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
+    const isExpanded = btn.getAttribute("aria-expanded") === "true";
     const chevronDown = btn.querySelector(".fa-chevron-down");
     const chevronUp = btn.querySelector(".fa-chevron-up");
 
-    chevronDown.classList.toggle("invisible");
-    chevronUp.classList.toggle("visible");
+    btn.setAttribute("aria-expanded", String(!isExpanded));
+
+    if (isExpanded) {
+      chevronDown.classList.remove("invisible");
+      chevronUp.classList.add("invisible");
+      dropdownIngredients.classList.remove("block");
+      dropdownIngredients.classList.add("hidden");
+      dropdownAppliances.classList.remove("block");
+      dropdownAppliances.classList.add("hidden");
+      dropdownUstensils.classList.remove("block");
+      dropdownUstensils.classList.add("hidden");
+    } else {
+      chevronDown.classList.add("invisible");
+      chevronUp.classList.remove("invisible");
+      dropdownIngredients.classList.remove("hidden");
+      dropdownIngredients.classList.add("block");
+      dropdownAppliances.classList.remove("hidden");
+      dropdownAppliances.classList.add("block");
+      dropdownUstensils.classList.remove("hidden");
+      dropdownUstensils.classList.add("block");
+    }
   });
 });
 
@@ -85,6 +109,7 @@ async function init() {
     recipesData = await getRecipes();
     updateNumberRecipes(recipesData);
     displayRecipes(recipesData);
+    setupDropdownMenus(recipesData);
   } catch (error) {
     console.error("Erreur lors de l'initialisation :", error);
   }
