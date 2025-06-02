@@ -3,6 +3,7 @@ import { createCard } from "../script/components/createCards";
 import { displaySearchCards } from "./components/recipeSearch";
 import { updateNumberRecipes } from "./components/utils";
 import { setupDropdownMenus } from "./components/dropdownList";
+import { expandedDropdown } from "./components/dropdownList";
 
 // Class
 
@@ -10,9 +11,11 @@ const subtitleClassCard = ["text-[#959595]", "pl-[30px]", "pt-[30px]"];
 
 // Selectors
 const cardContainer = document.querySelector(".card-container");
-const dropdownButtons = document.querySelectorAll(".dropdown-btn");
 const inputSearchBar = document.querySelector(".search-bar");
 const searchBtn = document.querySelector(".search-btn");
+const ingredientsBtn = document.getElementById("ingredients-btn");
+const appliancesBtn = document.getElementById("appliances-btn");
+const ustensilsBtn = document.getElementById("ustensils-btn");
 const dropdownIngredients = document.getElementById("ingredients-dropdown");
 const dropdownAppliances = document.getElementById("appliances-dropdown");
 const dropdownUstensils = document.getElementById("ustensils-dropdown");
@@ -56,35 +59,9 @@ searchBtn.addEventListener("click", () => {
 
 // Filters
 
-dropdownButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const isExpanded = btn.getAttribute("aria-expanded") === "true";
-    const chevronDown = btn.querySelector(".fa-chevron-down");
-    const chevronUp = btn.querySelector(".fa-chevron-up");
-
-    btn.setAttribute("aria-expanded", String(!isExpanded));
-
-    if (isExpanded) {
-      chevronDown.classList.remove("invisible");
-      chevronUp.classList.add("invisible");
-      dropdownIngredients.classList.remove("block");
-      dropdownIngredients.classList.add("hidden");
-      dropdownAppliances.classList.remove("block");
-      dropdownAppliances.classList.add("hidden");
-      dropdownUstensils.classList.remove("block");
-      dropdownUstensils.classList.add("hidden");
-    } else {
-      chevronDown.classList.add("invisible");
-      chevronUp.classList.remove("invisible");
-      dropdownIngredients.classList.remove("hidden");
-      dropdownIngredients.classList.add("block");
-      dropdownAppliances.classList.remove("hidden");
-      dropdownAppliances.classList.add("block");
-      dropdownUstensils.classList.remove("hidden");
-      dropdownUstensils.classList.add("block");
-    }
-  });
-});
+expandedDropdown(ingredientsBtn, dropdownIngredients);
+expandedDropdown(appliancesBtn, dropdownAppliances);
+expandedDropdown(ustensilsBtn, dropdownUstensils);
 
 // Cards
 

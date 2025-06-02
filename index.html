@@ -58,6 +58,7 @@
         <div class="flex gap-6">
           <div class="dropdown-container flex flex-col">
             <button
+              id="ingredients-btn"
               class="dropdown-btn bg-white h-[50px] text-black px-[20px] py-[10px] rounded-lg cursor-pointer flex items-center justify-between w-[180px]"
               aria-expanded="false"
             >
@@ -73,12 +74,13 @@
             </button>
             <ul
               id="ingredients-dropdown"
-              class="dropdown-list bg-white text-black px-[20px] py-[10px] rounded-b-lg cursor-pointer w-[180px] translate-y-[-10px] hidden"
+              class="dropdown-list absolute bg-white text-black px-[20px] py-[10px] rounded-b-lg cursor-pointer w-[180px] translate-y-[40px] z-50 shadow-md hidden"
             ></ul>
           </div>
 
           <div class="dropdown-container flex flex-col">
             <button
+              id="appliances-btn"
               class="dropdown-btn bg-white h-[50px] text-black px-[20px] py-[10px] rounded-lg cursor-pointer flex items-center justify-between w-[180px]"
               aria-expanded="false"
             >
@@ -94,12 +96,13 @@
             </button>
             <ul
               id="appliances-dropdown"
-              class="dropdown-list bg-white text-black px-[20px] py-[10px] rounded-b-lg cursor-pointer w-[180px] translate-y-[-10px] hidden"
+              class="dropdown-list absolute bg-white text-black px-[20px] py-[10px] rounded-b-lg cursor-pointer w-[180px] translate-y-[40px] z-50 shadow-md hidden"
             ></ul>
           </div>
 
           <div class="dropdown-container flex flex-col">
             <button
+              id="ustensils-btn"
               class="dropdown-btn bg-white h-[50px] text-black px-[20px] py-[10px] rounded-lg cursor-pointer flex items-center justify-between w-[180px]"
               aria-expanded="false"
             >
@@ -115,7 +118,7 @@
             </button>
             <ul
               id="ustensils-dropdown"
-              class="dropdown-list bg-white text-black px-[20px] py-[10px] rounded-b-lg cursor-pointer w-[180px] translate-y-[-10px] hidden"
+              class="dropdown-list absolute bg-white text-black px-[20px] py-[10px] rounded-b-lg cursor-pointer w-[180px] translate-y-[40px] z-50 shadow-md hidden"
             ></ul>
           </div>
         </div>
