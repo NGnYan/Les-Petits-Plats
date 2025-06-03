@@ -5,28 +5,31 @@ export function displayDropdown(id, recipes) {
   recipes.sort().forEach((elmt) => {
     const li = document.createElement("li");
     li.textContent = elmt;
+    li.addEventListener("click", (event) => {
+      const itemDropdown = event.target.textContent;
+    });
     dropdown.appendChild(li);
   });
 }
 
 export function setupDropdownMenus(recipes) {
   const ingredients = new Set();
-  const appareils = new Set();
-  const ustensiles = new Set();
+  const appliances = new Set();
+  const ustensils = new Set();
 
   recipes.forEach((recipe) => {
     recipe.ingredients.forEach((obj) => {
       ingredients.add(obj.ingredient);
     });
 
-    appareils.add(recipe.appliance);
+    appliances.add(recipe.appliance);
 
-    recipe.ustensils.forEach((ustencil) => ustensiles.add(ustencil));
+    recipe.ustensils.forEach((ustensil) => ustensils.add(ustensil));
   });
 
   displayDropdown("ingredients-dropdown", [...ingredients]);
-  displayDropdown("appliances-dropdown", [...appareils]);
-  displayDropdown("ustensils-dropdown", [...ustensiles]);
+  displayDropdown("appliances-dropdown", [...appliances]);
+  displayDropdown("ustensils-dropdown", [...ustensils]);
 }
 
 export function expandedDropdown(btn, dropdown) {

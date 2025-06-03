@@ -1,3 +1,14 @@
+/**
+ * Create card element.
+ * @param {Object} recipe - The recipe data object.
+ * @param {string} recipe.name - The name of the recipe.
+ * @param {string} recipe.image - The filename of the recipe image.
+ * @param {number} recipe.time - The recipe time in minutes.
+ * @param {string} recipe.description - A brief description of the recipe.
+ * @param {Array<Object>} recipe.ingredients - An array of ingredient objects.
+ * @param {string[]} subtitleClassCard - An array of CSS class names.
+ *
+ */
 export function createCard(recipe, subtitleClassCard) {
   const card = document.createElement("div");
   card.className =

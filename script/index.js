@@ -10,15 +10,10 @@ import { expandedDropdown } from "./components/dropdownList";
 const subtitleClassCard = ["text-[#959595]", "pl-[30px]", "pt-[30px]"];
 
 // Selectors
+const bodyContainer = document.querySelector(".body-container");
 const cardContainer = document.querySelector(".card-container");
 const inputSearchBar = document.querySelector(".search-bar");
 const searchBtn = document.querySelector(".search-btn");
-const ingredientsBtn = document.getElementById("ingredients-btn");
-const appliancesBtn = document.getElementById("appliances-btn");
-const ustensilsBtn = document.getElementById("ustensils-btn");
-const dropdownIngredients = document.getElementById("ingredients-dropdown");
-const dropdownAppliances = document.getElementById("appliances-dropdown");
-const dropdownUstensils = document.getElementById("ustensils-dropdown");
 
 let recipesData = [];
 
@@ -58,18 +53,21 @@ searchBtn.addEventListener("click", () => {
 });
 
 // Filters
+const itemsDropdown = ["ingredients", "appliances", "ustensils"];
 
-expandedDropdown(ingredientsBtn, dropdownIngredients);
-expandedDropdown(appliancesBtn, dropdownAppliances);
-expandedDropdown(ustensilsBtn, dropdownUstensils);
+for (let i = 0; i < itemsDropdown.length; i++) {
+  expandedDropdown(
+    document.getElementById(`${itemsDropdown[i]}-btn`),
+    document.getElementById(`${itemsDropdown[i]}-dropdown`)
+  );
+}
 
 // Cards
 
 /**
  * Display the recipe cards
  */
-async function displayRecipes() {
-  const recipes = await getRecipes();
+async function displayRecipes(recipes) {
   cardContainer.innerHTML = "";
 
   recipes.forEach((recipe) => {
@@ -89,6 +87,65 @@ async function init() {
     setupDropdownMenus(recipesData);
   } catch (error) {
     console.error("Erreur lors de l'initialisation :", error);
+
+    const overlay = document.createElement("div");
+    overlay.classList.add(
+      "fixed",
+      "top-0",
+      "left-0",
+      "w-full",
+      "h-full",
+      "bg-black/20",
+      "z-40"
+    );
+
+    const errorMessage = document.createElement("div");
+    errorMessage.textContent = "Une erreur est survenue !";
+    errorMessage.classList.add(
+      "fixed",
+      "top-1/2",
+      "left-1/2",
+      "-translate-x-1/2",
+      "-translate-y-1/2",
+      "flex",
+      "items-center",
+      "justify-center",
+      "w-150",
+      "text-center",
+      "bg-white",
+      "font-anton",
+      "text-[3em]",
+      "text-[#FFD15B]",
+      "whitespace-nowrap",
+      "p-6",
+      "rounded-xl",
+      "shadow-lg",
+      "mx-auto",
+      "z-50"
+    );
+
+    const closeButton = document.createElement("button");
+    closeButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+    closeButton.classList.add(
+      "absolute",
+      "top-3",
+      "right-4",
+      "text-2xl",
+      "text-[#ababab]",
+      "hover:text-[#969696]",
+      "cursor-pointer",
+      "z-50"
+    );
+    closeButton.setAttribute("aria-label", "Fermer le message d'erreur");
+
+    errorMessage.appendChild(closeButton);
+    bodyContainer.appendChild(overlay);
+    bodyContainer.appendChild(errorMessage);
+
+    closeButton.addEventListener("click", () => {
+      overlay.remove();
+      errorMessage.remove();
+    });
   }
 }
 
