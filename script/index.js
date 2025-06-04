@@ -4,6 +4,7 @@ import { displaySearchCards } from "./components/recipeSearch";
 import { updateNumberRecipes } from "./components/utils";
 import { setupDropdownMenus } from "./components/dropdownList";
 import { expandedDropdown } from "./components/dropdownList";
+import { sanitizeInput } from "./components/utils";
 
 // Class
 
@@ -34,8 +35,10 @@ async function getRecipes() {
 
 inputSearchBar.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
+    const inputText = inputSearchBar.value;
+    const searchText = sanitizeInput(inputText).toLowerCase().trim();
     displaySearchCards(
-      inputSearchBar,
+      searchText,
       recipesData,
       cardContainer,
       subtitleClassCard
@@ -44,15 +47,13 @@ inputSearchBar.addEventListener("keydown", (event) => {
 });
 
 searchBtn.addEventListener("click", () => {
-  displaySearchCards(
-    inputSearchBar,
-    recipesData,
-    cardContainer,
-    subtitleClassCard
-  );
+  const inputText = inputSearchBar.value;
+  const searchText = sanitizeInput(inputText).toLowerCase().trim();
+  displaySearchCards(searchText, recipesData, cardContainer, subtitleClassCard);
 });
 
 // Filters
+
 const itemsDropdown = ["ingredients", "appliances", "ustensils"];
 
 for (let i = 0; i < itemsDropdown.length; i++) {

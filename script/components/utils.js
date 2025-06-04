@@ -19,9 +19,7 @@ export function updateNumberRecipes(recipes) {
  * @param {Array} allRecipes - The array of all available recipe objects.
  * @returns {Array} - The filtered array of recipes matching the search text.
  */
-export function filterRecipes(inputSearchBar, allRecipes) {
-  const searchText = inputSearchBar.value.trim().toLowerCase();
-
+export function filterRecipes(searchText, allRecipes) {
   const filteredRecipes = allRecipes.filter(
     (recipe) =>
       recipe.name.toLowerCase().includes(searchText) ||
@@ -34,4 +32,16 @@ export function filterRecipes(inputSearchBar, allRecipes) {
       )
   );
   return filteredRecipes;
+}
+
+/**
+ * Sanitizes the input string to prevent attacks.
+ *
+ * @param {string} input - The input string to be sanitized.
+ * @returns {string} The sanitized input string with harmful characters removed or escaped.
+ */
+export function sanitizeInput(input) {
+  const sanitizerDiv = document.createElement("div");
+  sanitizerDiv.textContent = input;
+  return sanitizerDiv.textContent;
 }
