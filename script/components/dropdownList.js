@@ -5,6 +5,17 @@ export function displayDropdown(id, recipes) {
   recipes.sort().forEach((elmt) => {
     const li = document.createElement("li");
     li.textContent = elmt;
+    li.className = `
+    cursor-pointer
+    mb-1
+    px-4 
+    py-2
+    hover:bg-gray-100
+    text-gray-700
+    rounded
+    mb-1
+  `;
+
     li.addEventListener("click", (event) => {
       const itemDropdown = event.target.textContent;
     });
@@ -18,8 +29,8 @@ export function setupDropdownMenus(recipes) {
   const ustensils = new Set();
 
   recipes.forEach((recipe) => {
-    recipe.ingredients.forEach((obj) => {
-      ingredients.add(obj.ingredient);
+    recipe.ingredients.forEach((objet) => {
+      ingredients.add(objet.ingredient);
     });
 
     appliances.add(recipe.appliance);

@@ -1,4 +1,5 @@
 import "../css/style.css";
+import { getRecipes } from "../script/components/api";
 import { createCard } from "../script/components/createCards";
 import { displaySearchCards } from "./components/recipeSearch";
 import { updateNumberRecipes } from "./components/utils";
@@ -18,38 +19,40 @@ const searchBtn = document.querySelector(".search-btn");
 
 let recipesData = [];
 
-/**
- * API call to fetch
- * @returns {Promise<Object>} JSON data of the recipes.
- */
-async function getRecipes() {
-  const response = await fetch("/data/recipes.json");
-  if (!response.ok) {
-    throw new Error(`Erreur ${response.status}`);
-  }
-  const data = await response.json();
-  return data.recipes;
-}
-
 // Search Bar
 
 inputSearchBar.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     const inputText = inputSearchBar.value;
     const searchText = sanitizeInput(inputText).toLowerCase().trim();
-    displaySearchCards(
-      searchText,
-      recipesData,
-      cardContainer,
-      subtitleClassCard
-    );
+
+    if (searchText.length >= 3) {
+      displaySearchCards(
+        searchText,
+        recipesData,
+        cardContainer,
+        subtitleClassCard
+      );
+    } else {
+      displayRecipes(recipesData);
+    }
   }
 });
 
 searchBtn.addEventListener("click", () => {
   const inputText = inputSearchBar.value;
   const searchText = sanitizeInput(inputText).toLowerCase().trim();
-  displaySearchCards(searchText, recipesData, cardContainer, subtitleClassCard);
+
+  if (searchText.length >= 3) {
+    displaySearchCards(
+      searchText,
+      recipesData,
+      cardContainer,
+      subtitleClassCard
+    );
+  } else {
+    displayRecipes(recipesData);
+  }
 });
 
 // Filters
