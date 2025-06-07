@@ -8,7 +8,6 @@ export function displayDropdown(id, recipes) {
     li.className = `
     cursor-pointer
     mb-1
-    px-4 
     py-2
     hover:bg-gray-100
     text-gray-700
@@ -44,23 +43,31 @@ export function setupDropdownMenus(recipes) {
 }
 
 export function expandedDropdown(btn, dropdown) {
+  const isExpanded = btn.getAttribute("aria-expanded") === "true"; // Pourquoi pas mis à jour ?
+  const chevronDown = btn.querySelector(".fa-chevron-down");
+  const chevronUp = btn.querySelector(".fa-chevron-up");
+
   btn.addEventListener("click", () => {
-    const isExpanded = btn.getAttribute("aria-expanded") === "true";
-    const chevronDown = btn.querySelector(".fa-chevron-down");
-    const chevronUp = btn.querySelector(".fa-chevron-up");
-
     btn.setAttribute("aria-expanded", String(!isExpanded));
+    toggleDropdown(!isExpanded);
+  });
 
+  dropdown.addEventListener("mouseleave", () => {
+    btn.setAttribute("aria-expanded", "false");
+    toggleDropdown(false);
+  });
+
+  function toggleDropdown(isExpanded) {
     if (isExpanded) {
-      chevronDown.classList.remove("invisible");
-      chevronUp.classList.add("invisible");
-      dropdown.classList.remove("block");
-      dropdown.classList.add("hidden");
-    } else {
       chevronDown.classList.add("invisible");
       chevronUp.classList.remove("invisible");
       dropdown.classList.remove("hidden");
       dropdown.classList.add("block");
+    } else {
+      chevronDown.classList.remove("invisible");
+      chevronUp.classList.add("invisible");
+      dropdown.classList.remove("block");
+      dropdown.classList.add("hidden");
     }
-  });
+  }
 }
