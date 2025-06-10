@@ -19,18 +19,50 @@ export function updateNumberRecipes(recipes) {
  * @param {Array} allRecipes - The array of all available recipe objects.
  * @returns {Array} - The filtered array of recipes matching the search text.
  */
-export function filterRecipes(searchText, allRecipes) {
-  const filteredRecipes = allRecipes.filter(
-    (recipe) =>
-      recipe.name.toLowerCase().includes(searchText) ||
-      recipe.description.toLowerCase().includes(searchText) ||
-      recipe.ingredients.some(
-        (ingredient) =>
-          ingredient.ingredient.toLowerCase().includes(searchText) &&
-          ingredient.quantity != null &&
-          ingredient.quantity != undefined
-      )
-  );
+export function filterRecipes(
+  searchText,
+  allRecipes,
+  selectedIngredients,
+  selectedAppliances,
+  selectedUstensils
+) {
+  let filteredRecipes;
+
+  if (searchText) {
+    filteredRecipes = allRecipes.filter(
+      (recipe) =>
+        recipe.name
+          .toLowerCase()
+          .includes(
+            searchText ||
+              selectedIngredients ||
+              selectedAppliances ||
+              selectedUstensils
+          ) ||
+        recipe.description
+          .toLowerCase()
+          .includes(
+            searchText ||
+              selectedIngredients ||
+              selectedAppliances ||
+              selectedUstensils
+          ) ||
+        recipe.ingredients.some(
+          (ingredient) =>
+            ingredient.ingredient
+              .toLowerCase()
+              .includes(
+                searchText ||
+                  selectedIngredients ||
+                  selectedAppliances ||
+                  selectedUstensils
+              ) &&
+            ingredient.quantity != null &&
+            ingredient.quantity != undefined
+        )
+    );
+  }
+
   return filteredRecipes;
 }
 
@@ -41,7 +73,5 @@ export function filterRecipes(searchText, allRecipes) {
  * @returns {string} The sanitized input string with harmful characters removed or escaped.
  */
 export function sanitizeInput(input) {
-  const sanitizerDiv = document.createElement("div");
-  sanitizerDiv.textContent = input;
-  return sanitizerDiv.textContent;
+  return String(input);
 }

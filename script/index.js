@@ -2,7 +2,7 @@ import "../css/style.css";
 import { getRecipes } from "../script/components/api";
 import { createCard } from "../script/components/createCards";
 import { displaySearchCards } from "./components/recipeSearch";
-import { updateNumberRecipes } from "./components/utils";
+import { filterRecipes, updateNumberRecipes } from "./components/utils";
 import { setupDropdownMenus } from "./components/dropdownList";
 import { expandedDropdown } from "./components/dropdownList";
 import { sanitizeInput } from "./components/utils";
@@ -25,14 +25,20 @@ inputSearchBar.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     const inputText = inputSearchBar.value;
     const searchText = sanitizeInput(inputText).toLowerCase().trim();
+    const selectedIngredients = sessionStorage.getItem("ingredients");
+    const selectedAppliances = sessionStorage.getItem("appliances");
+    const selectedUstensils = sessionStorage.getItem("ustensils");
 
     if (searchText.length >= 3) {
-      displaySearchCards(
+      const filteredRecipes = filterRecipes(
         searchText,
         recipesData,
-        cardContainer,
-        subtitleClassCard
+        selectedIngredients,
+        selectedAppliances,
+        selectedUstensils
       );
+
+      displaySearchCards(filteredRecipes, cardContainer, subtitleClassCard);
     } else {
       displayRecipes(recipesData);
     }
@@ -42,14 +48,20 @@ inputSearchBar.addEventListener("keydown", (event) => {
 searchBtn.addEventListener("click", () => {
   const inputText = inputSearchBar.value;
   const searchText = sanitizeInput(inputText).toLowerCase().trim();
+  const selectedIngredients = sessionStorage.getItem("ingredients");
+  const selectedAppliances = sessionStorage.getItem("appliances");
+  const selectedUstensils = sessionStorage.getItem("ustensils");
 
   if (searchText.length >= 3) {
-    displaySearchCards(
+    const filteredRecipes = filterRecipes(
       searchText,
       recipesData,
-      cardContainer,
-      subtitleClassCard
+      selectedIngredients,
+      selectedAppliances,
+      selectedUstensils
     );
+
+    displaySearchCards(filteredRecipes, cardContainer, subtitleClassCard);
   } else {
     displayRecipes(recipesData);
   }

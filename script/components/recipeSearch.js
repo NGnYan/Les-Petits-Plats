@@ -12,12 +12,10 @@ import { filterRecipes } from "./utils";
  * @param {Array} subtitleClassCard - Array of CSS classes to style the card subtitles.
  */
 export function displaySearchCards(
-  searchText,
-  allRecipes,
+  filteredRecipes,
   cardContainer,
   subtitleClassCard
 ) {
-  const filteredRecipes = filterRecipes(searchText, allRecipes);
   updateNumberRecipes(filteredRecipes);
 
   if (filteredRecipes.length === 0) {
