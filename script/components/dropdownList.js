@@ -1,10 +1,16 @@
-export function displayDropdown(id, recipes, name) {
+// Selectors
+export function displayDropdown(
+  id,
+  recipes,
+  category,
+  handleDropdownItemClick
+) {
   const dropdown = document.getElementById(id);
   dropdown.innerHTML = "";
 
   recipes.sort().forEach((elmt) => {
     const li = document.createElement("li");
-    li.textContent = elmt;
+    li.textContent = elmt.charAt(0).toUpperCase() + elmt.slice(1).toLowerCase();
     li.className = `
     cursor-pointer
     mb-1
@@ -15,15 +21,15 @@ export function displayDropdown(id, recipes, name) {
     mb-1
   `;
 
-    li.addEventListener("click", (event) => {
-      const selectedItem = event.target.textContent;
-      sessionStorage.setItem(name, selectedItem);
+    li.addEventListener("click", () => {
+      handleDropdownItemClick(category, li.textContent);
     });
+
     dropdown.appendChild(li);
   });
 }
 
-export function setupDropdownMenus(recipes) {
+export function setupDropdownMenus(recipes, handleDropdownItemClick) {
   const ingredients = new Set();
   const appliances = new Set();
   const ustensils = new Set();
@@ -38,9 +44,24 @@ export function setupDropdownMenus(recipes) {
     recipe.ustensils.forEach((ustensil) => ustensils.add(ustensil));
   });
 
-  displayDropdown("ingredients-dropdown", [...ingredients], "ingredients");
-  displayDropdown("appliances-dropdown", [...appliances], "appliances");
-  displayDropdown("ustensils-dropdown", [...ustensils], "ustensils");
+  displayDropdown(
+    "ingredients-dropdown",
+    [...ingredients],
+    "ingredients",
+    handleDropdownItemClick
+  );
+  displayDropdown(
+    "appliances-dropdown",
+    [...appliances],
+    "appliances",
+    handleDropdownItemClick
+  );
+  displayDropdown(
+    "ustensils-dropdown",
+    [...ustensils],
+    "ustensils",
+    handleDropdownItemClick
+  );
 }
 
 export function expandedDropdown(btn, dropdown) {

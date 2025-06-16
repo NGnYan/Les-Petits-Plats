@@ -30,6 +30,7 @@ inputSearchBar.addEventListener("keydown", (event) => {
     const selectedUstensils = sessionStorage.getItem("ustensils");
 
     if (searchText.length >= 3) {
+      errorMessageInput.textContent = "";
       const filteredRecipes = filterRecipes(
         searchText,
         recipesData,
@@ -41,6 +42,7 @@ inputSearchBar.addEventListener("keydown", (event) => {
       displaySearchCards(filteredRecipes, cardContainer, subtitleClassCard);
     } else {
       displayRecipes(recipesData);
+      errorMessageInput.textContent = "Veuillez entrer au moins 3 caractères.";
     }
   }
 });
@@ -53,6 +55,7 @@ searchBtn.addEventListener("click", () => {
   const selectedUstensils = sessionStorage.getItem("ustensils");
 
   if (searchText.length >= 3) {
+    errorMessageInput.textContent = "";
     const filteredRecipes = filterRecipes(
       searchText,
       recipesData,
@@ -64,6 +67,7 @@ searchBtn.addEventListener("click", () => {
     displaySearchCards(filteredRecipes, cardContainer, subtitleClassCard);
   } else {
     displayRecipes(recipesData);
+    errorMessageInput.textContent = "Veuillez entrer au moins 3 caractères.";
   }
 });
 
@@ -76,6 +80,28 @@ for (let i = 0; i < itemsDropdown.length; i++) {
     document.getElementById(`${itemsDropdown[i]}-btn`),
     document.getElementById(`${itemsDropdown[i]}-dropdown`)
   );
+}
+
+function handleDropdownItemClick(category, selectedItem) {
+  sessionStorage.setItem(category, selectedItem);
+
+  const inputText = inputSearchBar.value;
+  const searchText = sanitizeInput(inputText).toLowerCase().trim();
+
+  const selectedIngredients = sessionStorage.getItem("ingredients");
+  const selectedAppliances = sessionStorage.getItem("appliances");
+  const selectedUstensils = sessionStorage.getItem("ustensils");
+
+  const filteredRecipes = filterRecipes(
+    searchText,
+    recipesData,
+    selectedIngredients,
+    selectedAppliances,
+    selectedUstensils
+  );
+
+  displaySearchCards(filteredRecipes, cardContainer, subtitleClassCard);
+  updateNumberRecipes(filteredRecipes);
 }
 
 // Cards
@@ -98,9 +124,10 @@ async function displayRecipes(recipes) {
 async function init() {
   try {
     recipesData = await getRecipes();
+    recipesData = recipesData;
     updateNumberRecipes(recipesData);
     displayRecipes(recipesData);
-    setupDropdownMenus(recipesData);
+    setupDropdownMenus(recipesData, handleDropdownItemClick);
   } catch (error) {
     console.error("Erreur lors de l'initialisation :", error);
 
