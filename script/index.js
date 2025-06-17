@@ -16,6 +16,7 @@ const bodyContainer = document.querySelector(".body-container");
 const cardContainer = document.querySelector(".card-container");
 const inputSearchBar = document.querySelector(".search-bar");
 const searchBtn = document.querySelector(".search-btn");
+const dropdownContainer = document.querySelector(".dropdown-container");
 
 let recipesData = [];
 
@@ -84,6 +85,33 @@ for (let i = 0; i < itemsDropdown.length; i++) {
 
 function handleDropdownItemClick(category, selectedItem) {
   sessionStorage.setItem(category, selectedItem);
+
+  const itemSelectioned = document.createElement("div");
+  itemSelectioned.classList.add(
+    "bg-[#FFD15B]",
+    "text-black",
+    "px-[20px]",
+    "py-[10px]",
+    "rounded-lg",
+    "flex",
+    "items-center",
+    "justify-between",
+    "w-[180px]",
+    "mt-4"
+  );
+  itemSelectioned.textContent = selectedItem;
+
+  const closeBtn = document.createElement("button");
+  closeBtn.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+  closeBtn.classList.add("cursor-pointer");
+  itemSelectioned.appendChild(closeBtn);
+
+  closeBtn.addEventListener("click", () => {
+    itemSelectioned.remove();
+    sessionStorage.removeItem(category);
+  });
+
+  dropdownContainer.appendChild(itemSelectioned);
 
   const inputText = inputSearchBar.value;
   const searchText = sanitizeInput(inputText).toLowerCase().trim();

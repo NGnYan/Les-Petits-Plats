@@ -26,44 +26,38 @@ export function filterRecipes(
   selectedAppliances,
   selectedUstensils
 ) {
-  let filteredRecipes;
+  return allRecipes.filter((recipe) => {
+    const search = searchText.toLowerCase();
 
-  if (searchText) {
-    filteredRecipes = allRecipes.filter(
-      (recipe) =>
-        recipe.name
-          .toLowerCase()
-          .includes(
-            searchText ||
-              selectedIngredients ||
-              selectedAppliances ||
-              selectedUstensils
-          ) ||
-        recipe.description
-          .toLowerCase()
-          .includes(
-            searchText ||
-              selectedIngredients ||
-              selectedAppliances ||
-              selectedUstensils
-          ) ||
-        recipe.ingredients.some(
-          (ingredient) =>
-            ingredient.ingredient
-              .toLowerCase()
-              .includes(
-                searchText ||
-                  selectedIngredients ||
-                  selectedAppliances ||
-                  selectedUstensils
-              ) &&
-            ingredient.quantity != null &&
-            ingredient.quantity != undefined
-        )
+    const matchesSearch =
+      !searchText ||
+      recipe.name.toLowerCase().includes(search) ||
+      recipe.description.toLowerCase().includes(search) ||
+      recipe.ingredients.some((ing) =>
+        ing.ingredient.toLowerCase().includes(search)
+      );
+
+    const matchesIngredient =
+      !selectedIngredients ||
+      recipe.ingredients.some(
+        (ing) =>
+          ing.ingredient.toLowerCase() === selectedIngredients.toLowerCase()
+      );
+
+    const matchesAppliance =
+      !selectedAppliances ||
+      recipe.appliance.toLowerCase() === selectedAppliances.toLowerCase();
+
+    const matchesUstensil =
+      !selectedUstensils ||
+      recipe.ustensils.some(
+        (ust) => ust.toLowerCase() === selectedUstensils.toLowerCase()
+      );
+
+    return (
+      matchesSearch && matchesIngredient && matchesAppliance && matchesUstensil
     );
-  }
-
-  return filteredRecipes;
+  });
 }
 
 /**
