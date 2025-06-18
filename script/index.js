@@ -83,7 +83,7 @@ for (let i = 0; i < itemsDropdown.length; i++) {
   );
 }
 
-function handleDropdownItemClick(category, selectedItem) {
+export function handleDropdownItemClick(category, selectedItem) {
   sessionStorage.setItem(category, selectedItem);
 
   const itemSelectioned = document.createElement("div");

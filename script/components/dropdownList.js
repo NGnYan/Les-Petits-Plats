@@ -1,10 +1,7 @@
+import { handleDropdownItemClick } from "../index.js";
+
 // Selectors
-export function displayDropdown(
-  id,
-  recipes,
-  category,
-  handleDropdownItemClick
-) {
+export function displayDropdown(id, recipes, category) {
   const dropdown = document.getElementById(id);
   dropdown.innerHTML = "";
 
@@ -29,7 +26,7 @@ export function displayDropdown(
   });
 }
 
-export function setupDropdownMenus(recipes, handleDropdownItemClick) {
+export function setupDropdownMenus(recipes) {
   const ingredients = new Set();
   const appliances = new Set();
   const ustensils = new Set();
@@ -44,24 +41,9 @@ export function setupDropdownMenus(recipes, handleDropdownItemClick) {
     recipe.ustensils.forEach((ustensil) => ustensils.add(ustensil));
   });
 
-  displayDropdown(
-    "ingredients-dropdown",
-    [...ingredients],
-    "ingredients",
-    handleDropdownItemClick
-  );
-  displayDropdown(
-    "appliances-dropdown",
-    [...appliances],
-    "appliances",
-    handleDropdownItemClick
-  );
-  displayDropdown(
-    "ustensils-dropdown",
-    [...ustensils],
-    "ustensils",
-    handleDropdownItemClick
-  );
+  displayDropdown("ingredients-dropdown", [...ingredients], "ingredients");
+  displayDropdown("appliances-dropdown", [...appliances], "appliances");
+  displayDropdown("ustensils-dropdown", [...ustensils], "ustensils");
 }
 
 export function expandedDropdown(btn, dropdown) {
@@ -70,11 +52,13 @@ export function expandedDropdown(btn, dropdown) {
 
   btn.addEventListener("click", () => {
     const isExpanded = btn.getAttribute("aria-expanded") === "true";
-    btn.setAttribute("aria-expanded", String(!isExpanded));
+
     if (isExpanded) {
-      toggleDropdown();
-    } else {
+      btn.setAttribute("aria-expanded", "false");
       untoggleDropdown();
+    } else {
+      btn.setAttribute("aria-expanded", "true");
+      toggleDropdown();
     }
   });
 
@@ -88,6 +72,7 @@ export function expandedDropdown(btn, dropdown) {
     chevronUp.classList.remove("invisible");
     dropdown.classList.remove("hidden");
     dropdown.classList.add("block");
+    dropdown.classList.add("max-h-[300px]", "overflow-y-auto");
   }
 
   function untoggleDropdown() {
@@ -95,5 +80,6 @@ export function expandedDropdown(btn, dropdown) {
     chevronUp.classList.add("invisible");
     dropdown.classList.remove("block");
     dropdown.classList.add("hidden");
+    dropdown.classList.remove("max-h-[300px]", "overflow-y-auto");
   }
 }
