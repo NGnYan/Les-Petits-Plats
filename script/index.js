@@ -15,6 +15,7 @@ const subtitleClassCard = ["text-[#959595]", "pl-[30px]", "pt-[30px]"];
 const bodyContainer = document.querySelector(".body-container");
 const cardContainer = document.querySelector(".card-container");
 const inputSearchBar = document.querySelector(".search-bar");
+const errorMessageInput = document.getElementById("errorMessageInput");
 const searchBtn = document.querySelector(".search-btn");
 const dropdownContainer = document.querySelector(".dropdown-container");
 
