@@ -22,36 +22,46 @@ export function updateNumberRecipes(recipes) {
 export function filterRecipes(
   searchText,
   allRecipes,
-  selectedIngredients,
-  selectedAppliances,
-  selectedUstensils
+  selectedIngredients = [],
+  selectedAppliances = [],
+  selectedUstensils = []
 ) {
   return allRecipes.filter((recipe) => {
     const search = searchText.toLowerCase();
 
     const matchesSearch =
-      !searchText ||
       recipe.name.toLowerCase().includes(search) ||
       recipe.description.toLowerCase().includes(search) ||
       recipe.ingredients.some((ing) =>
         ing.ingredient.toLowerCase().includes(search)
       );
 
+    const selectedIngsLower = selectedIngredients.map((ing) =>
+      ing.toLowerCase()
+    );
+
     const matchesIngredient =
-      !selectedIngredients ||
-      recipe.ingredients.some(
-        (ing) =>
-          ing.ingredient.toLowerCase() === selectedIngredients.toLowerCase()
+      selectedIngredients.length === 0 ||
+      recipe.ingredients.some((ing) =>
+        selectedIngsLower.includes(ing.ingredient.toLowerCase())
       );
 
+    const selectedAppliancesLower = selectedAppliances.map((appliance) =>
+      appliance.toLowerCase()
+    );
+
     const matchesAppliance =
-      !selectedAppliances ||
-      recipe.appliance.toLowerCase() === selectedAppliances.toLowerCase();
+      selectedAppliances.length === 0 ||
+      selectedAppliancesLower.includes(recipe.appliance.toLowerCase());
+
+    const selectedUstensilsLower = selectedUstensils.map((ustensil) =>
+      ustensil.toLowerCase()
+    );
 
     const matchesUstensil =
-      !selectedUstensils ||
-      recipe.ustensils.some(
-        (ust) => ust.toLowerCase() === selectedUstensils.toLowerCase()
+      selectedUstensils.length === 0 ||
+      recipe.ustensils.some((ustensil) =>
+        selectedUstensilsLower.includes(ustensil.toLowerCase())
       );
 
     return (

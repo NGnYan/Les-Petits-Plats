@@ -21,40 +21,22 @@ const dropdownContainer = document.querySelector(".dropdown-container");
 
 let recipesData = [];
 
+const itemsDropdownData = { ingredients: [], appliances: [], ustensils: [] };
+
 // Search Bar
-
-inputSearchBar.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    const inputText = inputSearchBar.value;
-    const searchText = sanitizeInput(inputText).toLowerCase().trim();
-    const selectedIngredients = sessionStorage.getItem("ingredients");
-    const selectedAppliances = sessionStorage.getItem("appliances");
-    const selectedUstensils = sessionStorage.getItem("ustensils");
-
-    if (searchText.length >= 3) {
-      errorMessageInput.textContent = "";
-      const filteredRecipes = filterRecipes(
-        searchText,
-        recipesData,
-        selectedIngredients,
-        selectedAppliances,
-        selectedUstensils
-      );
-
-      displaySearchCards(filteredRecipes, cardContainer, subtitleClassCard);
-    } else {
-      displayRecipes(recipesData);
-      errorMessageInput.textContent = "Veuillez entrer au moins 3 caractères.";
-    }
-  }
-});
-
-searchBtn.addEventListener("click", () => {
+function applyFilters() {
   const inputText = inputSearchBar.value;
   const searchText = sanitizeInput(inputText).toLowerCase().trim();
-  const selectedIngredients = sessionStorage.getItem("ingredients");
-  const selectedAppliances = sessionStorage.getItem("appliances");
-  const selectedUstensils = sessionStorage.getItem("ustensils");
+
+  const selectedIngredients = JSON.parse(
+    sessionStorage.getItem("ingredients") || "[]"
+  );
+  const selectedAppliances = JSON.parse(
+    sessionStorage.getItem("appliances") || "[]"
+  );
+  const selectedUstensils = JSON.parse(
+    sessionStorage.getItem("ustensils") || "[]"
+  );
 
   if (searchText.length >= 3) {
     errorMessageInput.textContent = "";
@@ -71,6 +53,16 @@ searchBtn.addEventListener("click", () => {
     displayRecipes(recipesData);
     errorMessageInput.textContent = "Veuillez entrer au moins 3 caractères.";
   }
+}
+
+inputSearchBar.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    applyFilters();
+  }
+});
+
+searchBtn.addEventListener("click", () => {
+  applyFilters();
 });
 
 // Filters
@@ -85,7 +77,14 @@ for (let i = 0; i < itemsDropdown.length; i++) {
 }
 
 export function handleDropdownItemClick(category, selectedItem) {
-  sessionStorage.setItem(category, selectedItem);
+  if (!itemsDropdownData[category].includes(selectedItem)) {
+    itemsDropdownData[category].push(selectedItem);
+  }
+
+  sessionStorage.setItem(
+    "itemsDropdownData",
+    JSON.stringify(itemsDropdownData)
+  );
 
   const itemSelectioned = document.createElement("div");
   itemSelectioned.classList.add(
@@ -109,7 +108,13 @@ export function handleDropdownItemClick(category, selectedItem) {
 
   closeBtn.addEventListener("click", () => {
     itemSelectioned.remove();
-    sessionStorage.removeItem(category);
+    itemsDropdown[category] = itemsDropdown[category].filter(
+      (item) => item !== selectedItem
+    );
+    sessionStorage.setItem(
+      "itemsDropdownData",
+      JSON.stringify(itemsDropdownData)
+    );
   });
 
   dropdownContainer.appendChild(itemSelectioned);
@@ -117,9 +122,12 @@ export function handleDropdownItemClick(category, selectedItem) {
   const inputText = inputSearchBar.value;
   const searchText = sanitizeInput(inputText).toLowerCase().trim();
 
-  const selectedIngredients = sessionStorage.getItem("ingredients");
-  const selectedAppliances = sessionStorage.getItem("appliances");
-  const selectedUstensils = sessionStorage.getItem("ustensils");
+  const dataFromStorage = JSON.parse(
+    sessionStorage.getItem("itemsDropdownData")
+  );
+  const selectedIngredients = dataFromStorage.ingredients;
+  const selectedAppliances = dataFromStorage.appliances;
+  const selectedUstensils = dataFromStorage.ustensils;
 
   const filteredRecipes = filterRecipes(
     searchText,
