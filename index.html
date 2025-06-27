@@ -57,7 +57,7 @@
     <main class="min-h-[calc(100vh_-_500px)] w-full">
       <!-- Filters -->
       <div
-        class="flex pt-[20px] pl-[80px] pr-[80px] pb-[50px] justify-between items-center"
+        class="filter-dropdown relative flex flex-col pt-[20px] pl-[80px] pr-[80px] pb-[30px] gap-6"
       >
         <div class="flex gap-6">
           <div class="dropdown-container flex flex-col">
@@ -104,7 +104,7 @@
             ></ul>
           </div>
 
-          <div class="dropdown-container flex flex-col">
+          <div class="dropdown-container flex flex-col relative">
             <button
               id="ustensils-btn"
               class="dropdown-btn bg-white h-[50px] text-black px-[20px] py-[10px] rounded-lg cursor-pointer flex items-center justify-between w-[180px]"
@@ -127,8 +127,10 @@
           </div>
         </div>
 
+        <div id="selected-tags" class="flex flex-wrap gap-4"></div>
+
         <div
-          class="number-recipes text-black font-bold text-xl font-anton"
+          class="number-recipes text-black font-bold text-xl font-anton absolute top-[30px] right-[80px]"
         ></div>
       </div>
 

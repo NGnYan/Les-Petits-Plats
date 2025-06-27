@@ -18,6 +18,7 @@ const inputSearchBar = document.querySelector(".search-bar");
 const errorMessageInput = document.getElementById("errorMessageInput");
 const searchBtn = document.querySelector(".search-btn");
 const dropdownContainer = document.querySelector(".dropdown-container");
+const tagContainer = document.getElementById("selected-tags");
 
 let recipesData = [];
 
@@ -96,8 +97,7 @@ export function handleDropdownItemClick(category, selectedItem) {
     "flex",
     "items-center",
     "justify-between",
-    "w-[180px]",
-    "mt-4"
+    "w-[180px]"
   );
   itemSelectioned.textContent = selectedItem;
 
@@ -108,16 +108,36 @@ export function handleDropdownItemClick(category, selectedItem) {
 
   closeBtn.addEventListener("click", () => {
     itemSelectioned.remove();
-    itemsDropdown[category] = itemsDropdown[category].filter(
+
+    itemsDropdownData[category] = itemsDropdownData[category].filter(
       (item) => item !== selectedItem
     );
+
     sessionStorage.setItem(
       "itemsDropdownData",
       JSON.stringify(itemsDropdownData)
     );
+
+    const inputText = inputSearchBar.value;
+    const searchText = sanitizeInput(inputText).toLowerCase().trim();
+
+    const selectedIngredients = itemsDropdownData.ingredients;
+    const selectedAppliances = itemsDropdownData.appliances;
+    const selectedUstensils = itemsDropdownData.ustensils;
+
+    const filteredRecipes = filterRecipes(
+      searchText,
+      recipesData,
+      selectedIngredients,
+      selectedAppliances,
+      selectedUstensils
+    );
+
+    displaySearchCards(filteredRecipes, cardContainer, subtitleClassCard);
+    updateNumberRecipes(filteredRecipes);
   });
 
-  dropdownContainer.appendChild(itemSelectioned);
+  tagContainer.appendChild(itemSelectioned);
 
   const inputText = inputSearchBar.value;
   const searchText = sanitizeInput(inputText).toLowerCase().trim();
