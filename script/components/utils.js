@@ -40,10 +40,14 @@ export function filterRecipes(
       ing.toLowerCase()
     );
 
+    const recipeIngredientsLower = recipe.ingredients.map((ing) =>
+      ing.ingredient.toLowerCase()
+    );
+
     const matchesIngredient =
       selectedIngredients.length === 0 ||
-      recipe.ingredients.some((ing) =>
-        selectedIngsLower.includes(ing.ingredient.toLowerCase())
+      selectedIngsLower.every((selectedIng) =>
+        recipeIngredientsLower.includes(selectedIng)
       );
 
     const selectedAppliancesLower = selectedAppliances.map((appliance) =>
