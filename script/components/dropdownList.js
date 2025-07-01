@@ -5,10 +5,13 @@ export function displayDropdown(id, recipes, category) {
   const dropdown = document.getElementById(id);
   dropdown.innerHTML = "";
 
-  recipes.sort().forEach((elmt) => {
-    const li = document.createElement("li");
-    li.textContent = elmt.charAt(0).toUpperCase() + elmt.slice(1).toLowerCase();
-    li.className = `
+  recipes
+    .sort((a, b) => a.localeCompare(b, "fr", { sensitivity: "base" }))
+    .forEach((elmt) => {
+      const li = document.createElement("li");
+      li.textContent =
+        elmt.charAt(0).toUpperCase() + elmt.slice(1).toLowerCase();
+      li.className = `
     cursor-pointer
     mb-1
     py-2
@@ -18,12 +21,12 @@ export function displayDropdown(id, recipes, category) {
     mb-1
   `;
 
-    li.addEventListener("click", () => {
-      handleDropdownItemClick(category, li.textContent);
-    });
+      li.addEventListener("click", () => {
+        handleDropdownItemClick(category, li.textContent);
+      });
 
-    dropdown.appendChild(li);
-  });
+      dropdown.appendChild(li);
+    });
 }
 
 export function setupDropdownMenus(recipes) {

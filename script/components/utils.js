@@ -1,3 +1,5 @@
+import DOMPurify from "dompurify";
+
 // Selectors
 const numberRecipes = document.querySelector(".number-recipes");
 
@@ -81,5 +83,5 @@ export function filterRecipes(
  * @returns {string} The sanitized input string with harmful characters removed or escaped.
  */
 export function sanitizeInput(input) {
-  return String(input);
+  return DOMPurify.sanitize(input);
 }

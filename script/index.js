@@ -78,9 +78,10 @@ for (let i = 0; i < itemsDropdown.length; i++) {
 }
 
 export function handleDropdownItemClick(category, selectedItem) {
-  if (!itemsDropdownData[category].includes(selectedItem)) {
-    itemsDropdownData[category].push(selectedItem);
+  if (itemsDropdownData[category].includes(selectedItem)) {
+    return;
   }
+  itemsDropdownData[category].push(selectedItem);
 
   sessionStorage.setItem(
     "itemsDropdownData",
