@@ -41,12 +41,6 @@ export function displayDropdown(id, recipes, category) {
   hidden
 `;
 
-  deleteBtn.addEventListener("click", () => {
-    inputDropdown.value = "";
-    deleteBtn.classList.add("hidden");
-    inputDropdown.focus();
-  });
-
   const searchIcon = document.createElement("span");
   searchIcon.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i>`;
   searchIcon.className = `
@@ -63,13 +57,7 @@ export function displayDropdown(id, recipes, category) {
   searchContainer.appendChild(searchIcon);
   dropdown.appendChild(searchContainer);
 
-  inputDropdown.addEventListener("input", () => {
-    if (inputDropdown.value.length > 0) {
-      deleteBtn.classList.remove("hidden");
-    } else {
-      deleteBtn.classList.add("hidden");
-    }
-  });
+  const listItems = [];
 
   recipes
     .sort((a, b) => a.localeCompare(b, "fr", { sensitivity: "base" }))
@@ -95,7 +83,52 @@ export function displayDropdown(id, recipes, category) {
       });
 
       dropdown.appendChild(li);
+      listItems.push(li);
     });
+
+  deleteBtn.addEventListener("click", () => {
+    inputDropdown.value = "";
+    deleteBtn.classList.add("hidden");
+    inputDropdown.focus();
+
+    listItems.forEach((li) => {
+      li.style.display = "block";
+    });
+  });
+
+  searchIcon.addEventListener("click", () => {
+    const value = inputDropdown.value;
+
+    listItems.forEach((li) => {
+      const item = li.textContent.toLowerCase();
+      if (item.includes(value)) {
+        li.style.display = "block";
+      } else {
+        li.style.display = "none";
+      }
+    });
+  });
+
+  inputDropdown.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      const value = inputDropdown.value.toLowerCase();
+
+      if (value.length > 0) {
+        deleteBtn.classList.remove("hidden");
+      } else {
+        deleteBtn.classList.add("hidden");
+      }
+
+      listItems.forEach((li) => {
+        const item = li.textContent.toLowerCase();
+        if (item.includes(value)) {
+          li.style.display = "block";
+        } else {
+          li.style.display = "none";
+        }
+      });
+    }
+  });
 }
 
 export function setupDropdownMenus(recipes) {

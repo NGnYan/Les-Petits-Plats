@@ -17,7 +17,6 @@ const cardContainer = document.querySelector(".card-container");
 const inputSearchBar = document.querySelector(".search-bar");
 const errorMessageInput = document.getElementById("errorMessageInput");
 const searchBtn = document.querySelector(".search-btn");
-const dropdownContainer = document.querySelector(".dropdown-container");
 const tagContainer = document.getElementById("selected-tags");
 
 let recipesData = [];
@@ -39,7 +38,10 @@ function applyFilters() {
     sessionStorage.getItem("ustensils") || "[]"
   );
 
-  if (searchText.length >= 3) {
+  if (searchText.length === 0) {
+    errorMessageInput.textContent = "";
+    displayRecipes(recipesData);
+  } else if (searchText.length >= 3) {
     errorMessageInput.textContent = "";
     const filteredRecipes = filterRecipes(
       searchText,
