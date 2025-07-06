@@ -16,7 +16,8 @@ export function displayDropdown(id, recipes, category) {
   inputDropdown.type = "text";
   inputDropdown.placeholder = "Rechercher";
   inputDropdown.className = `
-  w-full
+  max-w-[calc(100%-1rem)]
+  mx-2
   pl-3 pr-10
   py-2
   border
@@ -45,7 +46,7 @@ export function displayDropdown(id, recipes, category) {
   searchIcon.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i>`;
   searchIcon.className = `
   absolute
-  right-2
+  right-4
   top-1/2
   -translate-y-1/2
   text-gray-400
@@ -69,10 +70,9 @@ export function displayDropdown(id, recipes, category) {
     cursor-pointer
     mb-1
     py-2
-    px-4
+    px-3
     hover:bg-[#FFD15B]
     text-gray-700
-    rounded
     block
     w-full
     box-border
