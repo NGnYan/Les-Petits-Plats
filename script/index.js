@@ -24,6 +24,10 @@ let recipesData = [];
 const itemsDropdownData = { ingredients: [], appliances: [], ustensils: [] };
 
 // Search Bar
+
+/**
+ * Applies filters based on the search bar input and the selected filter items (ingredients, appliances, utensils).
+ */
 function applyFilters() {
   const inputText = inputSearchBar.value;
   const searchText = sanitizeInput(inputText).toLowerCase().trim();
@@ -79,6 +83,12 @@ for (let i = 0; i < itemsDropdown.length; i++) {
   );
 }
 
+/**
+ * Handles the click event when a user selects an item from a dropdown (ingredient, appliance, or utensil).
+ *
+ * @param {string} category - The category of the item (ingredients, appliances, ustensils).
+ * @param {string} selectedItem - The item selected by the user in the dropdown.
+ */
 export function handleDropdownItemClick(category, selectedItem) {
   if (itemsDropdownData[category].includes(selectedItem)) {
     return;

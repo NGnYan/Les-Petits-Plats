@@ -1,6 +1,14 @@
 import { handleDropdownItemClick } from "../index.js";
 
 // Selectors
+
+/**
+ * Displays and manages a dynamic dropdown list (ingredients, appliances, or utensils).
+ *
+ * @param {string} id - The HTML element ID of the dropdown container.
+ * @param {Array<string>} recipes - The array of items to display in the dropdown.
+ * @param {string} category - The category of items (ingredients, appliances, or ustensils).
+ */
 export function displayDropdown(id, recipes, category) {
   const dropdown = document.getElementById(id);
   dropdown.innerHTML = "";
@@ -115,6 +123,11 @@ export function displayDropdown(id, recipes, category) {
   });
 }
 
+/**
+ * Sets up the dropdown menus (ingredients, appliances, and utensils) by extracting unique values from the list of recipes and displaying them.
+ *
+ * @param {Array<Object>} recipes - Array of recipe objects.
+ */
 export function setupDropdownMenus(recipes) {
   const ingredients = new Set();
   const appliances = new Set();
