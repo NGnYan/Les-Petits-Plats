@@ -16,8 +16,8 @@ export function displayDropdown(id, recipes, category) {
   inputDropdown.type = "text";
   inputDropdown.placeholder = "Rechercher";
   inputDropdown.className = `
-  max-w-[calc(100%-1rem)]
-  mx-2
+  max-w-[calc(100%-2rem)]
+  mx-4
   pl-3 pr-10
   py-2
   border
@@ -32,7 +32,7 @@ export function displayDropdown(id, recipes, category) {
   deleteBtn.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
   deleteBtn.className = `
   absolute
-  right-8
+  right-12
   top-1/2
   -translate-y-1/2
   text-gray-500
@@ -46,11 +46,10 @@ export function displayDropdown(id, recipes, category) {
   searchIcon.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i>`;
   searchIcon.className = `
   absolute
-  right-4
+  right-6
   top-1/2
   -translate-y-1/2
   text-gray-400
- cursor-pointer
 `;
 
   searchContainer.appendChild(inputDropdown);
@@ -96,8 +95,14 @@ export function displayDropdown(id, recipes, category) {
     });
   });
 
-  searchIcon.addEventListener("click", () => {
-    const value = inputDropdown.value;
+  inputDropdown.addEventListener("input", () => {
+    const value = inputDropdown.value.toLowerCase();
+
+    if (value.length > 0) {
+      deleteBtn.classList.remove("hidden");
+    } else {
+      deleteBtn.classList.add("hidden");
+    }
 
     listItems.forEach((li) => {
       const item = li.textContent.toLowerCase();
@@ -107,27 +112,6 @@ export function displayDropdown(id, recipes, category) {
         li.style.display = "none";
       }
     });
-  });
-
-  inputDropdown.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      const value = inputDropdown.value.toLowerCase();
-
-      if (value.length > 0) {
-        deleteBtn.classList.remove("hidden");
-      } else {
-        deleteBtn.classList.add("hidden");
-      }
-
-      listItems.forEach((li) => {
-        const item = li.textContent.toLowerCase();
-        if (item.includes(value)) {
-          li.style.display = "block";
-        } else {
-          li.style.display = "none";
-        }
-      });
-    }
   });
 }
 
