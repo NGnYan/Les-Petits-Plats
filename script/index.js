@@ -32,15 +32,15 @@ function applyFilters() {
   const inputText = inputSearchBar.value;
   const searchText = sanitizeInput(inputText).toLowerCase().trim();
 
-  const selectedIngredients = JSON.parse(
-    sessionStorage.getItem("ingredients") || "[]"
-  );
-  const selectedAppliances = JSON.parse(
-    sessionStorage.getItem("appliances") || "[]"
-  );
-  const selectedUstensils = JSON.parse(
-    sessionStorage.getItem("ustensils") || "[]"
-  );
+  // const selectedIngredients = JSON.parse(
+  //   sessionStorage.getItem("ingredients") || "[]"
+  // );
+  // const selectedAppliances = JSON.parse(
+  //   sessionStorage.getItem("appliances") || "[]"
+  // );
+  // const selectedUstensils = JSON.parse(
+  //   sessionStorage.getItem("ustensils") || "[]"
+  // );
 
   if (searchText.length === 0) {
     errorMessageInput.textContent = "";

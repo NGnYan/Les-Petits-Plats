@@ -1,6 +1,7 @@
 import { createCard } from "./createCards";
 import { updateNumberRecipes } from "./utils";
 import { inputSearchBar } from "../index.js";
+import { sanitizeInput } from "./utils";
 /**
  * Displays recipe cards based on the search input.
  * Filters the recipes using the search text, then dynamically generates and displays matching cards.
@@ -20,7 +21,7 @@ export function displaySearchCards(
   if (filteredRecipes.length === 0) {
     cardContainer.innerHTML = `
     <p class="absolute flex items-center justify-center w-full text-center text-lg whitespace-nowrap text-[#828282] pb-[50px]">
-      Aucune recette ne contient "${inputSearchBar.value}". <br> Vous pouvez chercher « tarte aux pommes », « poisson », etc.
+      Aucune recette ne contient "${sanitizeInput(inputSearchBar.value)}". <br> Vous pouvez chercher « tarte aux pommes », « poisson », etc.
     </p>
   
   `;
