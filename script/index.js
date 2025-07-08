@@ -36,8 +36,11 @@ function applyFilters() {
     sessionStorage.getItem("itemsDropdownData")
   );
   const selectedIngredients = itemsDropdownData.ingredients;
+  console.log(selectedIngredients);
   const selectedAppliances = itemsDropdownData.appliances;
+  console.log(selectedAppliances);
   const selectedUstensils = itemsDropdownData.ustensils;
+  console.log(selectedUstensils);
 
   if (searchText.length === 0) {
     errorMessageInput.textContent = "";
