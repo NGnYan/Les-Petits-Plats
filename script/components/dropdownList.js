@@ -15,17 +15,22 @@ export function displayDropdown(id, recipes, category) {
 
   const searchContainer = document.createElement("div");
   searchContainer.className = `
-  relative
+  sticky
+  top-0
+  z-10
+  bg-white
   w-full
   mb-2
+  px-2
+  pt-2
 `;
 
   const inputDropdown = document.createElement("input");
   inputDropdown.type = "text";
   inputDropdown.placeholder = "Rechercher";
   inputDropdown.className = `
-  max-w-[calc(100%-2rem)]
-  mx-4
+  max-w-[calc(100%-1rem)]
+  mx-2
   pl-3 pr-10
   py-2
   border
@@ -40,8 +45,8 @@ export function displayDropdown(id, recipes, category) {
   deleteBtn.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
   deleteBtn.className = `
   absolute
-  right-12
-  top-1/2
+  right-14
+  top-[60%]
   -translate-y-1/2
   text-gray-500
   hover:text-black
@@ -54,8 +59,8 @@ export function displayDropdown(id, recipes, category) {
   searchIcon.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i>`;
   searchIcon.className = `
   absolute
-  right-6
-  top-1/2
+  right-8
+  top-[60%]
   -translate-y-1/2
   text-gray-400
 `;
@@ -77,7 +82,7 @@ export function displayDropdown(id, recipes, category) {
     cursor-pointer
     mb-1
     py-2
-    px-3
+    px-5
     hover:bg-[#FFD15B]
     text-gray-700
     block
