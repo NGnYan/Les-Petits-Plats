@@ -164,9 +164,14 @@ export function expandedDropdown(btn, dropdown) {
     }
   });
 
-  dropdown.addEventListener("mouseleave", () => {
-    btn.setAttribute("aria-expanded", "false");
-    untoggleDropdown();
+  document.addEventListener("click", (event) => {
+    const isClickInside =
+      dropdown.contains(event.target) || btn.contains(event.target);
+
+    if (!isClickInside) {
+      btn.setAttribute("aria-expanded", "false");
+      untoggleDropdown();
+    }
   });
 
   function toggleDropdown() {
