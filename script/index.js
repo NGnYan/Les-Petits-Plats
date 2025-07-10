@@ -35,18 +35,27 @@ function applyFilters() {
   const itemsDropdownData = JSON.parse(
     sessionStorage.getItem("itemsDropdownData")
   );
-  const selectedIngredients = itemsDropdownData.ingredients;
-  console.log(selectedIngredients);
-  const selectedAppliances = itemsDropdownData.appliances;
-  console.log(selectedAppliances);
-  const selectedUstensils = itemsDropdownData.ustensils;
-  console.log(selectedUstensils);
+  const selectedIngredients = itemsDropdownData?.ingredients;
+  const selectedAppliances = itemsDropdownData?.appliances;
+  const selectedUstensils = itemsDropdownData?.ustensils;
 
-  if (searchText.length === 0) {
+  if (
+    searchText.length === 0 &&
+    selectedIngredients.length === 0 &&
+    selectedAppliances.length === 0 &&
+    selectedUstensils.length === 0
+  ) {
     errorMessageInput.textContent = "";
     displayRecipes(recipesData);
-  } else if (searchText.length >= 3) {
+  } else if (
+    searchText.length >= 3 ||
+    (searchText.length === 0 &&
+      (selectedIngredients.length > 0 ||
+        selectedAppliances.length > 0 ||
+        selectedUstensils.length > 0))
+  ) {
     errorMessageInput.textContent = "";
+
     const filteredRecipes = filterRecipes(
       searchText,
       recipesData,
