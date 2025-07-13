@@ -102,7 +102,6 @@ export function displayDropdown(id, recipes, category) {
         block
         w-full
         box-border
-        last:mb-0
       `;
 
       li.addEventListener("click", () => {

@@ -7,75 +7,24 @@
 }
 
 @layer components {
-  .item-selectioned {
-    background-color: #ffd15b;
-    color: black;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 180px;
-  }
-
-  .error-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 37.5rem;
-    text-align: center;
-    background-color: white;
-    font-family: "Anton", sans-serif;
-    font-size: 3em;
-    color: #ffd15b;
-    white-space: nowrap;
-    padding: 1.5rem;
-    border-radius: 0.75rem;
-    box-shadow:
-      0 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 50;
-  }
-
-  .search-container {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 50;
-    background-color: white;
-    padding-left: 0.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-  }
-
   .li-dropdown {
     cursor: pointer;
-    margin-bottom: 0.25rem; /* mb-1 in Tailwind CSS */
-    padding-top: 0.5rem; /* py-2 in Tailwind CSS */
-    padding-bottom: 0.5rem; /* py-2 in Tailwind CSS */
-    padding-left: 1.25rem; /* px-5 in Tailwind CSS */
-    padding-right: 1.25rem; /* px-5 in Tailwind CSS */
-    color: #374151; /* text-gray-700 in Tailwind CSS */
+    margin-bottom: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #374151;
     display: block;
     width: 100%;
-    box-sizing: border-box; /* box-border in Tailwind CSS */
-  }
+    box-sizing: border-box;
 
-  .li-dropdown:hover {
-    background-color: #ffd15b; /* hover:bg-[#FFD15B] in Tailwind CSS */
-  }
+    &:hover {
+      background-color: #ffd15b;
+    }
 
-  .li-dropdown:last-child {
-    margin-bottom: 0; /* last:mb-0 in Tailwind CSS */
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
