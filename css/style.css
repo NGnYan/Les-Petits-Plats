@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Manrope:wght@200..800&display=swap");
 @import "tailwindcss";
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities);
 
 @theme {
   --font-anton: "Anton", "sans-serif";
@@ -7,24 +10,63 @@
 }
 
 @layer components {
+  .item-selectioned {
+    @apply bg-[#FFD15B] text-black px-[20px] py-[10px] rounded-lg flex items-center justify-between w-[180px];
+  }
+
+  .overlay {
+    @apply fixed top-0 left-0 w-full h-full bg-black/20 z-40;
+  }
+
+  .error-message {
+    @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-[600px] text-center bg-white font-anton text-[3em] text-[#FFD15B] whitespace-nowrap p-6 rounded-xl shadow-lg mx-auto z-50;
+  }
+
+  .close-error-message {
+    @apply absolute top-1 right-4 text-2xl text-[#ababab] hover:text-[#969696] cursor-pointer z-50;
+  }
+
+  .img-recipe {
+    @apply w-full h-48 object-cover rounded-t-lg;
+  }
+
+  .title-recipe {
+    @apply font-anton font-bold text-[1.2em] pl-[30px] pr-[30px] pt-[40px];
+  }
+
+  .description-recipe {
+    @apply text-[0.9em] pl-[30px] pt-[20px] pr-[30px];
+  }
+
+  .ingredients-recipe {
+    @apply grid grid-cols-2 gap-x-[50px] gap-y-[20px] text-sm ml-[30px] mr-[30px];
+  }
+
+  .box-time {
+    @apply bg-[#FFD15B] absolute w-[80px] py-[5px] px-[15px] rounded-[100px] top-2 right-2;
+  }
+
+  .search-container {
+    @apply sticky top-0 left-0 w-full z-50 bg-white px-2 pt-2 pb-2;
+  }
+
+  .input-dropdown {
+    @apply w-[calc(100%-2rem)] mx-4 pl-3 pr-10 py-2 mb-2 border border-gray-300 rounded text-sm focus:outline-none box-border;
+  }
+
+  .delete-btn {
+    @apply absolute right-12 top-7 -translate-y-1/2 text-gray-500 hover:text-black text-sm cursor-pointer z-10;
+  }
+
+  .search-icon {
+    @apply absolute right-6 top-7 -translate-y-1/2 text-gray-400 z-10;
+  }
+
+  .ul-dropdown {
+    @apply max-h-[300px] overflow-y-auto bg-white text-black rounded-b-lg w-full z-40 shadow-md;
+  }
+
   .li-dropdown {
-    cursor: pointer;
-    margin-bottom: 4px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    color: #374151;
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-
-    &:hover {
-      background-color: #ffd15b;
-    }
-
-    &:last-child {
-      margin-bottom: 0;
-    }
+    @apply cursor-pointer mb-1 py-2 px-5 text-gray-700 block w-full box-border last:mb-0 hover:bg-[#FFD15B];
   }
 }

@@ -17,24 +17,11 @@ export function createCard(recipe, subtitleClassCard) {
   const imgRecipe = document.createElement("img");
   imgRecipe.src = `./assets/recipes/${recipe.image}`;
   imgRecipe.alt = recipe.name;
-  imgRecipe.classList.add(
-    "img-card-recipe",
-    "w-full",
-    "h-48",
-    "object-cover",
-    "rounded-t-lg"
-  );
+  imgRecipe.classList.add("img-recipe");
 
   const titleRecipe = document.createElement("h2");
   titleRecipe.textContent = recipe.name;
-  titleRecipe.classList.add(
-    "font-anton",
-    "font-bold",
-    "text-[1.2em]",
-    "pl-[30px]",
-    "pr-[30px]",
-    "pt-[40px]"
-  );
+  titleRecipe.classList.add("title-recipe");
 
   const subtitleRecipe = document.createElement("h3");
   subtitleRecipe.textContent = "RECETTE";
@@ -42,27 +29,14 @@ export function createCard(recipe, subtitleClassCard) {
 
   const description = document.createElement("p");
   description.textContent = recipe.description;
-  description.classList.add(
-    "text-[0.9em]",
-    "pl-[30px]",
-    "pt-[20px]",
-    "pr-[30px]"
-  );
+  description.classList.add("description-recipe");
 
   const subtitleIngredient = document.createElement("h3");
   subtitleIngredient.textContent = "INGRÉDIENTS";
   subtitleIngredient.classList.add(...subtitleClassCard);
 
   const ingredients = document.createElement("ul");
-  ingredients.classList.add(
-    "grid",
-    "grid-cols-2",
-    "gap-x-[50px]",
-    "gap-y-[20px]",
-    "text-sm",
-    "ml-[30px]",
-    "mr-[30px]"
-  );
+  ingredients.classList.add("ingredients-recipe");
 
   recipe.ingredients.forEach((ingredient) => {
     const li = document.createElement("li");
@@ -90,16 +64,7 @@ export function createCard(recipe, subtitleClassCard) {
 
   const boxTime = document.createElement("div");
   boxTime.textContent = `${recipe.time} min`;
-  boxTime.classList.add(
-    "bg-[#FFD15B]",
-    "absolute",
-    "w-200px",
-    "py-[5px]",
-    "px-[15px]",
-    "rounded-[100px]",
-    "top-2",
-    "right-2"
-  );
+  boxTime.classList.add("box-time");
 
   card.appendChild(imgRecipe);
   card.appendChild(titleRecipe);

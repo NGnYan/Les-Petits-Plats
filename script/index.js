@@ -41,18 +41,18 @@ function applyFilters() {
 
   if (
     searchText.length === 0 &&
-    selectedIngredients.length === 0 &&
-    selectedAppliances.length === 0 &&
-    selectedUstensils.length === 0
+    selectedIngredients?.length === 0 &&
+    selectedAppliances?.length === 0 &&
+    selectedUstensils?.length === 0
   ) {
     errorMessageInput.textContent = "";
     displayRecipes(recipesData);
   } else if (
     searchText.length >= 3 ||
     (searchText.length === 0 &&
-      (selectedIngredients.length > 0 ||
-        selectedAppliances.length > 0 ||
-        selectedUstensils.length > 0))
+      (selectedIngredients?.length > 0 ||
+        selectedAppliances?.length > 0 ||
+        selectedUstensils?.length > 0))
   ) {
     errorMessageInput.textContent = "";
 
@@ -110,17 +110,7 @@ export function handleDropdownItemClick(category, selectedItem) {
   );
 
   const itemSelectioned = document.createElement("div");
-  itemSelectioned.classList.add(
-    "bg-[#FFD15B]",
-    "text-black",
-    "px-[20px]",
-    "py-[10px]",
-    "rounded-lg",
-    "flex",
-    "items-center",
-    "justify-between",
-    "w-[180px]"
-  );
+  itemSelectioned.classList.add("item-selectioned");
   itemSelectioned.textContent = selectedItem;
 
   const closeBtn = document.createElement("button");
@@ -211,53 +201,15 @@ async function init() {
     console.error("Erreur lors de l'initialisation :", error);
 
     const overlay = document.createElement("div");
-    overlay.classList.add(
-      "fixed",
-      "top-0",
-      "left-0",
-      "w-full",
-      "h-full",
-      "bg-black/20",
-      "z-40"
-    );
+    overlay.classList.add("overlay");
 
     const errorMessage = document.createElement("div");
     errorMessage.textContent = "Une erreur est survenue !";
-    errorMessage.classList.add(
-      "fixed",
-      "top-1/2",
-      "left-1/2",
-      "-translate-x-1/2",
-      "-translate-y-1/2",
-      "flex",
-      "items-center",
-      "justify-center",
-      "w-150",
-      "text-center",
-      "bg-white",
-      "font-anton",
-      "text-[3em]",
-      "text-[#FFD15B]",
-      "whitespace-nowrap",
-      "p-6",
-      "rounded-xl",
-      "shadow-lg",
-      "mx-auto",
-      "z-50"
-    );
+    errorMessage.classList.add("error-message");
 
     const closeButton = document.createElement("button");
     closeButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
-    closeButton.classList.add(
-      "absolute",
-      "top-3",
-      "right-4",
-      "text-2xl",
-      "text-[#ababab]",
-      "hover:text-[#969696]",
-      "cursor-pointer",
-      "z-50"
-    );
+    closeButton.classList.add("close-error-message");
     closeButton.setAttribute("aria-label", "Fermer le message d'erreur");
 
     errorMessage.appendChild(closeButton);

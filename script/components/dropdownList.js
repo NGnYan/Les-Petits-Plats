@@ -15,57 +15,21 @@ export function displayDropdown(id, recipes, category) {
 
   const searchContainer = document.createElement("div");
   searchContainer.className = `
-    sticky
-    top-0
-    left-0
-    w-full
-    z-50
-    bg-white
-    px-2
-    pt-2
-    pb-2
+   "search-container"
   `;
 
   const inputDropdown = document.createElement("input");
   inputDropdown.type = "text";
   inputDropdown.placeholder = "Rechercher";
-  inputDropdown.className = `
-    w-full
-    pl-3 pr-10
-    py-2
-    border
-    border-gray-300
-    rounded
-    text-sm
-    focus:outline-none
-    box-border
-  `;
+  inputDropdown.className = "input-dropdown";
 
   const deleteBtn = document.createElement("button");
   deleteBtn.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
-  deleteBtn.className = `
-    absolute
-    right-10
-    top-7
-    -translate-y-1/2
-    text-gray-500
-    hover:text-black
-    text-sm
-    cursor-pointer
-    hidden
-    z-10
-  `;
+  deleteBtn.className = `delete-btn hidden`;
 
   const searchIcon = document.createElement("span");
   searchIcon.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i>`;
-  searchIcon.className = `
-   absolute
-    right-4
-    top-7
-    -translate-y-1/2
-    text-gray-400
-    z-10
-  `;
+  searchIcon.className = "search-icon";
 
   searchContainer.appendChild(inputDropdown);
   searchContainer.appendChild(deleteBtn);
@@ -73,16 +37,7 @@ export function displayDropdown(id, recipes, category) {
   dropdownContainer.appendChild(searchContainer);
 
   const list = document.createElement("ul");
-  list.className = `
-    max-h-[300px]
-    overflow-y-auto
-    bg-white
-    text-black
-    rounded-b-lg
-    w-full
-    z-40
-    shadow-md
-  `;
+  list.className = "ul-dropdown";
 
   const listItems = [];
 
@@ -92,17 +47,7 @@ export function displayDropdown(id, recipes, category) {
       const li = document.createElement("li");
       li.textContent =
         elmt.charAt(0).toUpperCase() + elmt.slice(1).toLowerCase();
-      li.className = `
-        cursor-pointer
-        mb-1
-        py-2
-        px-5
-        hover:bg-[#FFD15B]
-        text-gray-700
-        block
-        w-full
-        box-border
-      `;
+      li.className = "li-dropdown";
 
       li.addEventListener("click", () => {
         handleDropdownItemClick(category, li.textContent);
