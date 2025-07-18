@@ -18,13 +18,22 @@ export function displaySearchCards(
 ) {
   updateNumberRecipes(filteredRecipes);
 
+  const searchValue = sanitizeInput(inputSearchBar.value.trim());
+
   if (filteredRecipes.length === 0) {
+    let message;
+
+    if (searchValue.length >= 0) {
+      message = `Aucune recette ne contient "${searchValue}". <br> Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
+    } else {
+      message = `Aucune recette ne correspond à vos filtres sélectionnés.`;
+    }
+
     cardContainer.innerHTML = `
-    <p class="absolute flex items-center justify-center w-full text-center text-lg whitespace-nowrap text-[#828282] pb-[50px]">
-      Aucune recette ne contient "${sanitizeInput(inputSearchBar.value)}". <br> Vous pouvez chercher « tarte aux pommes », « poisson », etc.
-    </p>
-  
-  `;
+      <p class="absolute flex items-center justify-center w-full text-center text-lg whitespace-nowrap text-[#828282] pb-[50px]">
+        ${message}
+      </p>
+    `;
     return;
   }
 

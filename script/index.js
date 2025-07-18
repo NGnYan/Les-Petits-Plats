@@ -77,6 +77,10 @@ inputSearchBar.addEventListener("keydown", (event) => {
   }
 });
 
+inputSearchBar.addEventListener("input", () => {
+  sessionStorage.setItem("searchInputValue", inputSearchBar.value);
+});
+
 searchBtn.addEventListener("click", () => {
   applyFilters();
 });
@@ -197,6 +201,24 @@ async function init() {
     updateNumberRecipes(recipesData);
     displayRecipes(recipesData);
     setupDropdownMenus(recipesData, handleDropdownItemClick);
+    const savedSearch = sessionStorage.getItem("searchInputValue");
+    if (savedSearch) {
+      inputSearchBar.value = savedSearch;
+    }
+    const savedData = JSON.parse(
+      sessionStorage.getItem("itemsDropdownData")
+    ) || {
+      ingredients: [],
+      appliances: [],
+      ustensils: [],
+    };
+    ["ingredients", "appliances", "ustensils"].forEach((category) => {
+      savedData[category].forEach((selectedItem) => {
+        handleDropdownItemClick(category, selectedItem);
+      });
+    });
+
+    applyFilters();
   } catch (error) {
     console.error("Erreur lors de l'initialisation :", error);
 
