@@ -15,11 +15,14 @@ export function updateNumberRecipes(recipes) {
 /**
  * Filters recipes based on search bar input.
  * Matches if the search text is found in the recipe name, description,
- * or in any ingredient that has a defined quantity.
+ * or in any ingredient.
  *
- * @param {HTMLInputElement} inputSearchBar - The input element containing the user's search text.
+ * @param {string} searchText - The user's search input.
  * @param {Array} allRecipes - The array of all available recipe objects.
- * @returns {Array} - The filtered array of recipes matching the search text.
+ * @param {Array} selectedIngredients - Selected ingredients (optional).
+ * @param {Array} selectedAppliances - Selected appliances (optional).
+ * @param {Array} selectedUstensils - Selected utensils (optional).
+ * @returns {Array} - Filtered recipes.
  */
 export function filterRecipes(
   searchText,
@@ -28,9 +31,13 @@ export function filterRecipes(
   selectedAppliances = [],
   selectedUstensils = []
 ) {
-  return allRecipes.filter((recipe) => {
-    const search = searchText.toLowerCase();
+  const filteredRecipes = [];
+  const search = searchText.toLowerCase();
 
+  for (let i = 0; i < allRecipes.length; i++) {
+    const recipe = allRecipes[i];
+
+    // Vérifie si le texte recherché est dans le nom, la description ou les ingrédients
     const matchesSearch =
       recipe.name.toLowerCase().includes(search) ||
       recipe.description.toLowerCase().includes(search) ||
@@ -38,13 +45,18 @@ export function filterRecipes(
         ing.ingredient.toLowerCase().includes(search)
       );
 
-    const selectedIngsLower = selectedIngredients.map((ing) =>
-      ing.toLowerCase()
-    );
+    // Remplace .map() par une boucle for pour selectedIngredients
+    const selectedIngsLower = [];
+    for (let j = 0; j < selectedIngredients.length; j++) {
+      selectedIngsLower.push(selectedIngredients[j].toLowerCase());
+    }
 
-    const recipeIngredientsLower = recipe.ingredients.map((ing) =>
-      ing.ingredient.toLowerCase()
-    );
+    const recipeIngredientsLower = [];
+    for (let j = 0; j < recipe.ingredients.length; j++) {
+      recipeIngredientsLower.push(
+        recipe.ingredients[j].ingredient.toLowerCase()
+      );
+    }
 
     const matchesIngredient =
       selectedIngredients.length === 0 ||
@@ -52,17 +64,21 @@ export function filterRecipes(
         recipeIngredientsLower.includes(selectedIng)
       );
 
-    const selectedAppliancesLower = selectedAppliances.map((appliance) =>
-      appliance.toLowerCase()
-    );
+    // Remplace .map() par boucle for pour selectedAppliances
+    const selectedAppliancesLower = [];
+    for (let j = 0; j < selectedAppliances.length; j++) {
+      selectedAppliancesLower.push(selectedAppliances[j].toLowerCase());
+    }
 
     const matchesAppliance =
       selectedAppliances.length === 0 ||
       selectedAppliancesLower.includes(recipe.appliance.toLowerCase());
 
-    const selectedUstensilsLower = selectedUstensils.map((ustensil) =>
-      ustensil.toLowerCase()
-    );
+    // Remplace .map() par boucle for pour selectedUstensils
+    const selectedUstensilsLower = [];
+    for (let j = 0; j < selectedUstensils.length; j++) {
+      selectedUstensilsLower.push(selectedUstensils[j].toLowerCase());
+    }
 
     const matchesUstensil =
       selectedUstensils.length === 0 ||
@@ -70,10 +86,18 @@ export function filterRecipes(
         selectedUstensilsLower.includes(ustensil.toLowerCase())
       );
 
-    return (
-      matchesSearch && matchesIngredient && matchesAppliance && matchesUstensil
-    );
-  });
+    // Si tous les filtres passent, on ajoute la recette
+    if (
+      matchesSearch &&
+      matchesIngredient &&
+      matchesAppliance &&
+      matchesUstensil
+    ) {
+      filteredRecipes.push(recipe);
+    }
+  }
+
+  return filteredRecipes;
 }
 
 /**
