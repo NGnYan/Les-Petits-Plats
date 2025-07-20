@@ -218,7 +218,11 @@ async function init() {
       });
     });
 
-    applyFilters();
+    if (inputSearchBar.value.trim().length >= 3) {
+      applyFilters();
+    } else {
+      displayRecipes(recipesData);
+    }
   } catch (error) {
     console.error("Erreur lors de l'initialisation :", error);
 

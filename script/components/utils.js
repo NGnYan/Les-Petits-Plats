@@ -38,13 +38,16 @@ export function filterRecipes(
         ing.ingredient.toLowerCase().includes(search)
       );
 
-    const selectedIngsLower = selectedIngredients.map((ing) =>
-      ing.toLowerCase()
-    );
+    const selectedIngsLower = [];
+    for (let i = 0; i < selectedIngredients.length; i++) {
+      selectedIngsLower.push(selectedIngredients[i].toLowerCase());
+    }
 
-    const recipeIngredientsLower = recipe.ingredients.map((ing) =>
-      ing.ingredient.toLowerCase()
-    );
+    const recipeIngredientsLower = [];
+    for (let i = 0; i < recipe.ingredients.length; i++) {
+      const ing = recipe.ingredients[i];
+      recipeIngredientsLower.push(ing.ingredient.toLowerCase());
+    }
 
     const matchesIngredient =
       selectedIngredients.length === 0 ||
@@ -52,17 +55,19 @@ export function filterRecipes(
         recipeIngredientsLower.includes(selectedIng)
       );
 
-    const selectedAppliancesLower = selectedAppliances.map((appliance) =>
-      appliance.toLowerCase()
-    );
+    const selectedAppliancesLower = [];
+    for (let i = 0; i < selectedAppliances.length; i++) {
+      selectedAppliancesLower.push(selectedAppliances[i].toLowerCase());
+    }
 
     const matchesAppliance =
       selectedAppliances.length === 0 ||
       selectedAppliancesLower.includes(recipe.appliance.toLowerCase());
 
-    const selectedUstensilsLower = selectedUstensils.map((ustensil) =>
-      ustensil.toLowerCase()
-    );
+    const selectedUstensilsLower = [];
+    for (let i = 0; i < selectedUstensils.length; i++) {
+      selectedUstensilsLower.push(selectedUstensils[i].toLowerCase());
+    }
 
     const matchesUstensil =
       selectedUstensils.length === 0 ||
