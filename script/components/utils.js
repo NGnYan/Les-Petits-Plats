@@ -28,8 +28,11 @@ export function filterRecipes(
   selectedAppliances = [],
   selectedUstensils = []
 ) {
-  return allRecipes.filter((recipe) => {
-    const search = searchText.toLowerCase();
+  const filteredRecipes = [];
+  const search = searchText.toLowerCase();
+
+  for (let i = 0; i < allRecipes.length; i++) {
+    const recipe = allRecipes[i];
 
     const matchesSearch =
       recipe.name.toLowerCase().includes(search) ||
@@ -75,10 +78,17 @@ export function filterRecipes(
         selectedUstensilsLower.includes(ustensil.toLowerCase())
       );
 
-    return (
-      matchesSearch && matchesIngredient && matchesAppliance && matchesUstensil
-    );
-  });
+    if (
+      matchesSearch &&
+      matchesIngredient &&
+      matchesAppliance &&
+      matchesUstensil
+    ) {
+      filteredRecipes.push(recipe);
+    }
+  }
+
+  return filteredRecipes;
 }
 
 /**
