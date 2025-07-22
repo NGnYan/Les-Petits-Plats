@@ -29,16 +29,18 @@ export function filterRecipes(
   selectedUstensils = []
 ) {
   const filteredRecipes = [];
-  const search = searchText.toLowerCase();
+  const searchLower = searchText.toLowerCase();
+  const nameRecipeLower = recipe.name.toLowerCase();
+  const descriptionRecipeLower = recipe.description.toLowerCase();
 
   for (let i = 0; i < allRecipes.length; i++) {
     const recipe = allRecipes[i];
 
     const matchesSearch =
-      recipe.name.toLowerCase().includes(search) ||
-      recipe.description.toLowerCase().includes(search) ||
+      recipe.name.toLowerCase().includes(searchLower) ||
+      recipe.description.toLowerCase().includes(searchLower) ||
       recipe.ingredients.some((ing) =>
-        ing.ingredient.toLowerCase().includes(search)
+        ing.ingredient.toLowerCase().includes(searchLower)
       );
 
     const selectedIngsLower = [];
