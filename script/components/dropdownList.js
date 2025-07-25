@@ -97,12 +97,14 @@ export function setupDropdownMenus(recipes) {
 
   recipes.forEach((recipe) => {
     recipe.ingredients.forEach((objet) => {
-      ingredients.add(objet.ingredient);
+      ingredients.add(objet.ingredient.trim().toLowerCase());
     });
 
-    appliances.add(recipe.appliance);
+    appliances.add(recipe.appliance.trim().toLowerCase());
 
-    recipe.ustensils.forEach((ustensil) => ustensils.add(ustensil));
+    recipe.ustensils.forEach((ustensil) => {
+      ustensils.add(ustensil.trim().toLowerCase());
+    });
   });
 
   displayDropdown("ingredients-dropdown", [...ingredients], "ingredients");
