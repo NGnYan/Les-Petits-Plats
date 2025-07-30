@@ -47,6 +47,7 @@ function applyFilters() {
   ) {
     errorMessageInput.textContent = "";
     displayRecipes(recipesData);
+    updateNumberRecipes(recipesData);
   } else if (
     searchText.length >= 3 ||
     (searchText.length === 0 &&
@@ -67,6 +68,7 @@ function applyFilters() {
     displaySearchCards(filteredRecipes, cardContainer, subtitleClassCard);
   } else {
     displayRecipes(recipesData);
+    updateNumberRecipes(recipesData);
     errorMessageInput.textContent = "Veuillez entrer au moins 3 caractères.";
   }
 }
@@ -79,6 +81,7 @@ inputSearchBar.addEventListener("keydown", (event) => {
 
 inputSearchBar.addEventListener("input", () => {
   sessionStorage.setItem("searchInputValue", inputSearchBar.value);
+  applyFilters();
 });
 
 searchBtn.addEventListener("click", () => {
