@@ -38,10 +38,10 @@ export function filterRecipes(
     let matchesSearch = false;
 
     const nameLower = recipe.name.toLowerCase();
-    for (let i = 0; i <= nameLower.length - searchLower.length; i++) {
+    for (let j = 0; j <= nameLower.length - searchLower.length; j++) {
       let match = true;
-      for (let j = 0; j < searchLower.length; j++) {
-        if (nameLower[i + j] !== searchLower[j]) {
+      for (let k = 0; k < searchLower.length; k++) {
+        if (nameLower[j + k] !== searchLower[k]) {
           match = false;
           break;
         }
@@ -54,10 +54,10 @@ export function filterRecipes(
 
     if (!matchesSearch) {
       const descriptionLower = recipe.description.toLowerCase();
-      for (let i = 0; i <= descriptionLower.length - searchLower.length; i++) {
+      for (let j = 0; j <= descriptionLower.length - searchLower.length; j++) {
         let match = true;
-        for (let j = 0; j < searchLower.length; j++) {
-          if (descriptionLower[i + j] !== searchLower[j]) {
+        for (let k = 0; k < searchLower.length; k++) {
+          if (descriptionLower[j + k] !== searchLower[k]) {
             match = false;
             break;
           }
@@ -70,12 +70,12 @@ export function filterRecipes(
     }
 
     if (!matchesSearch) {
-      for (let i = 0; i < recipe.ingredients.length; i++) {
-        const ingredientLower = recipe.ingredients[i].ingredient.toLowerCase();
+      for (let j = 0; j < recipe.ingredients.length; j++) {
+        const ingredientLower = recipe.ingredients[j].ingredient.toLowerCase();
         for (let k = 0; k <= ingredientLower.length - searchLower.length; k++) {
           let match = true;
-          for (let j = 0; j < searchLower.length; j++) {
-            if (ingredientLower[k + j] !== searchLower[j]) {
+          for (let l = 0; l < searchLower.length; l++) {
+            if (ingredientLower[k + l] !== searchLower[l]) {
               match = false;
               break;
             }
@@ -89,31 +89,31 @@ export function filterRecipes(
       }
     }
 
+    // Dropdown ingredient
     const selectedIngsLower = [];
-    for (let i = 0; i < selectedIngredients.length; i++) {
-      selectedIngsLower.push(selectedIngredients[i].toLowerCase());
+    for (let j = 0; j < selectedIngredients.length; j++) {
+      selectedIngsLower.push(selectedIngredients[j].toLowerCase());
     }
 
     const recipeIngredientsLower = [];
-    for (let i = 0; i < recipe.ingredients.length; i++) {
-      const ing = recipe.ingredients[i];
+    for (let j = 0; j < recipe.ingredients.length; j++) {
+      const ing = recipe.ingredients[j];
       recipeIngredientsLower.push(ing.ingredient.toLowerCase());
     }
 
-    // Dropdown ingredient
     const matchesIngredient =
       selectedIngredients.length === 0 ||
       selectedIngsLower.every((selectedIng) => {
         let foundIngredient = false;
 
-        for (let i = 0; i < recipeIngredientsLower.length; i++) {
-          const recipeIngredient = recipeIngredientsLower[i];
+        for (let j = 0; j < recipeIngredientsLower.length; j++) {
+          const recipeIngredient = recipeIngredientsLower[j];
 
           if (recipeIngredient.length !== selectedIng.length) continue;
 
           let match = true;
-          for (let j = 0; j < selectedIng.length; j++) {
-            if (recipeIngredient[j] !== selectedIng[j]) {
+          for (let k = 0; k < selectedIng.length; k++) {
+            if (recipeIngredient[k] !== selectedIng[k]) {
               match = false;
               break;
             }
@@ -128,25 +128,25 @@ export function filterRecipes(
         return foundIngredient;
       });
 
+    // Dropdown appliance
     const selectedAppliancesLower = [];
-    for (let i = 0; i < selectedAppliances.length; i++) {
-      selectedAppliancesLower.push(selectedAppliances[i].toLowerCase());
+    for (let j = 0; j < selectedAppliances.length; j++) {
+      selectedAppliancesLower.push(selectedAppliances[j].toLowerCase());
     }
 
-    // Dropdown appliance
     let matchesAppliance = selectedAppliances.length === 0;
 
     if (!matchesAppliance) {
       const applianceLower = recipe.appliance.toLowerCase();
 
-      for (let i = 0; i < selectedAppliancesLower.length; i++) {
-        const selected = selectedAppliancesLower[i];
+      for (let j = 0; j < selectedAppliancesLower.length; j++) {
+        const selected = selectedAppliancesLower[j];
 
         if (selected.length !== applianceLower.length) continue;
 
         let match = true;
-        for (let j = 0; j < selected.length; j++) {
-          if (selected[j] !== applianceLower[j]) {
+        for (let k = 0; k < selected.length; k++) {
+          if (selected[k] !== applianceLower[k]) {
             match = false;
             break;
           }
@@ -159,26 +159,26 @@ export function filterRecipes(
       }
     }
 
+    // Dropdown ustensil
     const selectedUstensilsLower = [];
-    for (let i = 0; i < selectedUstensils.length; i++) {
-      selectedUstensilsLower.push(selectedUstensils[i].toLowerCase());
+    for (let j = 0; j < selectedUstensils.length; j++) {
+      selectedUstensilsLower.push(selectedUstensils[j].toLowerCase());
     }
 
-    // Dropdown ustensil
     let matchesUstensil = selectedUstensils.length === 0;
 
     if (!matchesUstensil) {
-      for (let i = 0; i < recipe.ustensils.length; i++) {
-        const ustensilLower = recipe.ustensils[i].toLowerCase();
+      for (let j = 0; j < recipe.ustensils.length; j++) {
+        const ustensilLower = recipe.ustensils[j].toLowerCase();
 
-        for (let j = 0; j < selectedUstensilsLower.length; j++) {
-          const selected = selectedUstensilsLower[j];
+        for (let k = 0; k < selectedUstensilsLower.length; k++) {
+          const selected = selectedUstensilsLower[k];
 
           if (selected.length !== ustensilLower.length) continue;
 
           let match = true;
-          for (let k = 0; k < selected.length; k++) {
-            if (selected[k] !== ustensilLower[k]) {
+          for (let l = 0; l < selected.length; l++) {
+            if (selected[l] !== ustensilLower[l]) {
               match = false;
               break;
             }
@@ -203,7 +203,6 @@ export function filterRecipes(
       filteredRecipes.push(recipe);
     }
   }
-
   return filteredRecipes;
 }
 
