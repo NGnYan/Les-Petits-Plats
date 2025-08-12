@@ -66,9 +66,11 @@ function applyFilters() {
     );
 
     displaySearchCards(filteredRecipes, cardContainer, subtitleClassCard);
+    setupDropdownMenus(filteredRecipes);
   } else {
     displayRecipes(recipesData);
     updateNumberRecipes(recipesData);
+    setupDropdownMenus(recipesData);
     errorMessageInput.textContent = "Veuillez entrer au moins 3 caractères.";
   }
 }
@@ -154,6 +156,7 @@ export function handleDropdownItemClick(category, selectedItem) {
 
     displaySearchCards(filteredRecipes, cardContainer, subtitleClassCard);
     updateNumberRecipes(filteredRecipes);
+    setupDropdownMenus(filteredRecipes);
   });
 
   tagContainer.appendChild(itemSelectioned);
@@ -178,6 +181,7 @@ export function handleDropdownItemClick(category, selectedItem) {
 
   displaySearchCards(filteredRecipes, cardContainer, subtitleClassCard);
   updateNumberRecipes(filteredRecipes);
+  setupDropdownMenus(filteredRecipes);
 }
 
 // Cards
@@ -203,7 +207,7 @@ async function init() {
     recipesData = recipesData;
     updateNumberRecipes(recipesData);
     displayRecipes(recipesData);
-    setupDropdownMenus(recipesData, handleDropdownItemClick);
+    setupDropdownMenus(recipesData);
     const savedSearch = sessionStorage.getItem("searchInputValue");
     if (savedSearch) {
       inputSearchBar.value = savedSearch;

@@ -99,17 +99,33 @@ export function setupDropdownMenus(recipes) {
     recipe.ingredients.forEach((objet) => {
       ingredients.add(objet.ingredient.trim().toLowerCase());
     });
-
     appliances.add(recipe.appliance.trim().toLowerCase());
-
     recipe.ustensils.forEach((ustensil) => {
       ustensils.add(ustensil.trim().toLowerCase());
     });
   });
 
-  displayDropdown("ingredients-dropdown", [...ingredients], "ingredients");
-  displayDropdown("appliances-dropdown", [...appliances], "appliances");
-  displayDropdown("ustensils-dropdown", [...ustensils], "ustensils");
+  const selectedData = JSON.parse(
+    sessionStorage.getItem("itemsDropdownData")
+  ) || {
+    ingredients: [],
+    appliances: [],
+    ustensils: [],
+  };
+
+  const filteredIngredients = [...ingredients].filter(
+    (ing) => !selectedData.ingredients.map((i) => i.toLowerCase()).includes(ing)
+  );
+  const filteredAppliances = [...appliances].filter(
+    (app) => !selectedData.appliances.map((a) => a.toLowerCase()).includes(app)
+  );
+  const filteredUstensils = [...ustensils].filter(
+    (ust) => !selectedData.ustensils.map((u) => u.toLowerCase()).includes(ust)
+  );
+
+  displayDropdown("ingredients-dropdown", filteredIngredients, "ingredients");
+  displayDropdown("appliances-dropdown", filteredAppliances, "appliances");
+  displayDropdown("ustensils-dropdown", filteredUstensils, "ustensils");
 }
 
 export function expandedDropdown(btn, dropdown) {
